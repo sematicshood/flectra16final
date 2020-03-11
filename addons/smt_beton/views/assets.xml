@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <template id="dashboard_assets_backend" name="dashboard_marketing_assets"
+              inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/less"
+                  href="/smt_beton/static/src/less/dashboard.less"></link>
+            <script
+                    type="text/javascript"
+                    src="/smt_beton/static/src/js/jormix_dashboard.js"
+            ></script>
+            <script
+                    type="text/javascript"
+                    src="/smt_beton/static/src/js/Chart.js"
+            ></script>
+        </xpath>
+    </template>
+
+</flectra>

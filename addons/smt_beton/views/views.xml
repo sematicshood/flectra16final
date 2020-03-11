@@ -1,0 +1,131 @@
+<flectra>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="smt_beton.list">
+      <field name="name">smt_beton list</field>
+      <field name="model">smt_beton.smt_beton</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="versi"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    <!-- explicit list view data konsumen -->
+
+    <record model="ir.ui.view" id="smt_beton.konsumen">
+      <field name="name">Data Konsumen</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="display_name" string="Name"/>
+          <field name="function" invisible="1"/>
+          <field name="contact_address"/>
+          <field name="phone"/>
+          <field name="email"/>
+          <field name="user_id" string="Marketing"/>
+          <field name="vat"/>
+          <field name="is_company" />
+          <field name="total_invoiced"/>
+          <field name="country_id" invisible="1"/>
+          <field name="parent_id" invisible="1"/>
+          <field name="active" invisible="1"/>
+        </tree>
+      </field>
+    </record>
+    <!-- explicit list view data konsumen -->
+
+    <record model="ir.ui.view" id="smt_beton.proyek">
+      <field name="name">Data Proyek</field>
+      <field name="model">sale.order</field>
+      <field name="arch" type="xml">
+        <tree string="Quotation" class="o_sale_order" decoration-bf="message_needaction==True" decoration-muted="state=='cancel'">
+            <field name="message_needaction" invisible="1"/>
+            <field name="name" string="Quotation Number"/>
+            <field name="partner_id"/>
+            <field name="analytic_account_id" string="Proyek"/>
+            <field name="date_order" string="Tanggal Order"/>
+            <field name="user_id" string="Marketing"/>
+            <field name="product_id" string="Produk"/>
+            <field name="amount_total" sum="Total Tax Included" widget="monetary"/>
+            <field name="currency_id" invisible="1"/>
+            <field name="state"/>
+        </tree>
+      </field>
+    </record>
+    <!-- explicit dashboard marketing view  -->
+    <record id="view_dashboard_marketing_kanban" model="ir.ui.view">
+        <field name="name">sale.order.kanban</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard o_kanban_mobile" js_class="jormix_dashboard">
+                <field name="name"/>
+                <field name="id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click sprint_kanban">
+                            <div class="o_project_kanban_main">
+                                <div class="o_kanban_card_content o_visible">
+                                    <div class="o_kanban_primary_left">
+                                        <div class="o_primary">
+                                            <span class="col-md-12 bold">
+                                                iSINYA INI APA ?
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="smt_beton.action_window">
+      <field name="name">smt_beton window</field>
+      <field name="res_model">smt_beton.smt_beton</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- actions opening views on daftar konsumen -->
+    <record model="ir.actions.act_window" id="smt_beton.data_konsumen">
+      <field name="name">Data Konsumen</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- actions opening views on daftar konsumen -->
+    <record model="ir.actions.act_window" id="smt_beton.data_proyek">
+      <field name="name">Data Proyek</field>
+      <field name="res_model">sale.order</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- action untuk memanggil dashboard -->
+
+    <record id="action_marketing_dashboard" model="ir.actions.act_window">
+        <field name="name">Marketing Dashboard</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,form,tree</field>
+        <field name="view_id" ref="view_dashboard_marketing_kanban"/>
+    </record>
+    <!-- Top menu item -->
+    <menuitem name="Jormix" id="smt_beton.menu_root"/>
+    <!-- menu categories -->
+
+    <menuitem name="Dashboard" id="smt_beton.menu_1" parent="smt_beton.menu_root"/>
+    <menuitem name="Marketing" id="smt_beton.menu_2" parent="smt_beton.menu_root"/>
+    <menuitem name="Produksi" id="smt_beton.menu_3" parent="smt_beton.menu_root"/>
+    <!-- actions -->
+    <menuitem name="Marketing" id="smt_beton.menu_1_list" parent="smt_beton.menu_1"
+              action="smt_beton.action_marketing_dashboard"/>
+    <menuitem name="Konsumen" id="smt_beton.menu_2_list" parent="smt_beton.menu_2"
+              action="smt_beton.data_konsumen"/>
+    <menuitem name="Proyek" id="smt_beton.menu_3_list" parent="smt_beton.menu_2"
+              action="smt_beton.data_proyek"/>
+    <menuitem name="Jadwal Produksi" id="smt_beton.menu_4_list" parent="smt_beton.menu_3"
+              action="smt_beton.action_window"/>
+
+  </data>
+</flectra>
