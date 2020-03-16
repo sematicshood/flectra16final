@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data>
+        <record id="sr_sale_order_view_search_inherit_sale_inherit_add_filters" model="ir.ui.view">
+            <field name="name">sr.sale.order.view.search.inherit.sale.inherit.add.filters</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='my_sale_orders_filter']" position="before">
+                    <filter string="Today"
+                            domain="[('date_order', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_order', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d 23:59:59'))]"/>
+                    <filter string="Yesterday" domain="[('date_order','&gt;=', ((context_today()  + relativedelta(days=-1)).strftime('%Y-%m-%d'))),
+           ('date_order','&lt;=', ((context_today()  + relativedelta(days=-1)).strftime('%Y-%m-%d')))]"/>
+                    <filter string="Last Week" domain="[('date_order','&gt;=', ((context_today()  + relativedelta(days=0, weeks=-1)).strftime('%Y-%m-%d'))),
+          ('date_order','&lt;=', ((context_today()  + relativedelta(days=5, weeks=-1)).strftime('%Y-%m-%d')))]"/>
+                    <filter string="Last Month"
+                            domain="[('date_order','&lt;=', (context_today()-relativedelta(day=31, months=1)).strftime('%%Y-%%m-%%d')),('date_order','&gt;=',(context_today()-relativedelta(day=1,months=1)).strftime('%%Y-%%m-%%d'))]"/>
+                    <filter string="Last Year"
+                            domain="[('date_order','&gt;=',(context_today()-relativedelta(years=1)).strftime('%%Y-01-01')),('date_order','&lt;=', time.strftime('%%Y-01-01'))]"/>
+                    <separator/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="sr_sale_order_view_search_inherit_quotation_inherit_add_filter" model="ir.ui.view">
+            <field name="name">sr.sale.order.view.search.inherit.quotation.inherit.add.filter</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='my_sale_orders_filter']" position="before">
+                    <filter string="Today"
+                            domain="[('date_order', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_order', '&lt;=', datetime.datetime.now().strftime('%Y-%m-%d 23:59:59'))]"/>
+                    <filter string="Yesterday" domain="[('date_order','&gt;=', ((context_today()  + relativedelta(days=-1)).strftime('%Y-%m-%d'))),
+         ('date_order','&lt;=', ((context_today()  + relativedelta(days=-1)).strftime('%Y-%m-%d')))]"/>
+                    <filter string="Last week" domain="[('date_order','&gt;=', ((context_today()  + relativedelta(days=0, weeks=-1)).strftime('%Y-%m-%d'))),
+         ('date_order','&lt;=', ((context_today()  + relativedelta(days=5, weeks=-1)).strftime('%Y-%m-%d')))]"/>
+                    <filter string="Last Month"
+                            domain="[('date_order','&lt;=', (context_today()-relativedelta(day=31, months=1)).strftime('%%Y-%%m-%%d')),('date_order','&gt;=',(context_today()-relativedelta(day=1,months=1)).strftime('%%Y-%%m-%%d'))]"/>
+                    <filter string="Last Year"
+                            domain="[('date_order','&gt;=',(context_today()-relativedelta(years=1)).strftime('%%Y-01-01')),('date_order','&lt;=', time.strftime('%%Y-01-01'))]"/>
+                    <separator/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</flectra>
