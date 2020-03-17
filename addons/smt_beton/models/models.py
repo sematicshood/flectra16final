@@ -24,3 +24,9 @@ class AddFieldResPartner(models.Model):
     nosiup = fields.Char()
     notdp = fields.Char()
     noptkp = fields.Char()
+
+
+class AddFieldSaleorder(models.Model):
+    _inherit = 'sale.order'
+
+    jaraklokasicor = fields.Float()
