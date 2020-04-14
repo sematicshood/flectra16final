@@ -1,0 +1,51 @@
+<flectra>
+  <data>
+    <!-- explicit list view definition -->
+    
+    <record model="ir.ui.view" id="management_api.list">
+      <field name="name">List Management API Key</field>
+      <field name="model">management_api.management_api</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="client_api"/>
+          <field name="client_secret"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="management_api.form">
+      <field name="name">Form Management API Key</field>
+      <field name="model">management_api.management_api</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <label for="name" string="Name Apps"/>
+            <field name="name"/>
+          </sheet>
+        </form>
+      </field>
+    </record>
+   
+
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="management_api.action_window">
+      <field name="name">List Management API Key</field>
+      <field name="res_model">management_api.management_api</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+   
+
+    <!-- Top menu item -->
+    
+    <menuitem name="Bengkel" id="management_api.menu_root"/>
+    <!-- menu categories -->
+    
+    <menuitem name="Management API" id="management_api.menu_1" parent="management_api.menu_root"/>
+    <menuitem name="Vehicle" id="management_api.menu_2" parent="management_api.menu_root"/>
+    <menuitem name="Laporan" id="management_api.menu_3" parent="management_api.menu_root"/>
+    <menuitem name="Credentials" id="management_api.credentials" parent="management_api.menu_1" action="management_api.action_window"/>
+   
+  </data>
+</flectra>
