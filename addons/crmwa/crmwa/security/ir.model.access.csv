@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crmwa_crmwa,crmwa.crmwa,model_crmwa_crmwa,,1,1,1,0
+access_crmwa_accounts,access_crmwa_accounts,model_crmwa_accounts,,1,1,1,0

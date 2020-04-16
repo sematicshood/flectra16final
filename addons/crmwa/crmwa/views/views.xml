@@ -1,0 +1,60 @@
+<flectra>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="crmwa.list">
+      <field name="name">Crmwa list</field>
+      <field name="model">crmwa.crmwa</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="crmwa.action_window">
+      <field name="name">Crmwa window</field>
+      <field name="res_model">crmwa.crmwa</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="crmwa.action_server">
+      <field name="name">Crmwa server</field>
+      <field name="model_id" ref="model_crmwa_crmwa"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="Crmwa" id="crmwa.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="crmwa.menu_1" parent="crmwa.menu_root"/>
+    <menuitem name="Menu 2" id="crmwa.menu_2" parent="crmwa.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="crmwa.menu_1_list" parent="crmwa.menu_1"
+              action="crmwa.action_window"/>
+    <menuitem name="Server to list" id="crmwa" parent="crmwa.menu_2"
+              action="crmwa.action_server"/>
+    -->
+  </data>
+</flectra>

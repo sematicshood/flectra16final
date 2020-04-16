@@ -1,0 +1,46 @@
+<flectra>
+	<data>
+		<record id="action_course_list1" model="ir.actions.act_window">
+			<field name="name">Daftar Costmers</field>
+			<field name="res_model">cmrwa.accounts</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a Course
+              </p>				
+				<p>klik tombol create untuk bikin Course baru</p>
+			</field>
+		</record>
+
+
+        <!--tree view of the patient model-->
+        <record id="patient_tree" model="ir.ui.view">
+            <field name="name">cmrwa.accounts.tree</field>
+            <field name="model">cmrwa.accounts</field>
+            <field name="arch" type="xml">
+                <tree string="Accounts">
+                    <field name="no_wa"/>
+                    <field name="no_motor"/>
+                    <field name="tanggal_input"/>
+                </tree>
+            </field>
+        </record>
+
+		<menuitem id="crmwa_0" name="Crmwa" sequence="10"/>		
+		<menuitem id="crmwa_1" name="Crmwa" sequence="10" parent="crmwa_0"/>
+		<menuitem id="crmwa_1_1"
+		 action="action_course_list1"
+		 name="Crmwa"
+		 sequence="10"
+		 parent="crmwa_1"/>
+
+		<menuitem id="crmwa_1_1_2"
+		 action="act_open_vit_efaktur_wizard"
+		 name="Send Daily Whatsapp"
+		 sequence="10"
+		 parent="crmwa_1"/>
+
+
+
+	</data>
+</flectra>

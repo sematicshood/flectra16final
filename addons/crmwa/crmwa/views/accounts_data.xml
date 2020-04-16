@@ -1,0 +1,30 @@
+<flectra>
+    <template id="accounts_data">
+        <t t-call="website.layout">
+        <t t-set="title">Accounts</t>
+        <div class="oe_structure">
+        <div class="container">
+        <t t-foreach="accounts" t-as="account">
+        <p>
+        Nomor Motor:
+        <t t-esc="account.no_motor"/>
+        </p>
+        <!--  <p> Nomor Wa: <t t-esc="account.no_wa"/></p>  -->
+        <form action="" method="post" target="_blank">
+            <br/>
+                <label for="nomor_motor"> Nomor Wa:</label>
+                    <input type="hidden" id="no_wa" name="no_wa"/>
+                    <br/>
+                    <label for="message"> Message:</label>
+                    <br/>
+                    <textarea name="message" rows="10" cols="30">Tulis text disini...</textarea>
+                    <br/>
+                <input type="submit" value="Submit"/>
+        </form>
+        <br/>
+        </t>
+        </div>
+        </div>
+        </t>
+    </template>
+</flectra>

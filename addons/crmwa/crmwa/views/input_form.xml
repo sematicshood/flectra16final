@@ -1,0 +1,16 @@
+<flectra>
+    <template id="account_input" name="Accounts_input">
+        <t t-call="website.layout">
+            <form action="/crmwa/post_input/" method="get" target="_blank">
+                <br/>
+                    <label for="nomor_hp"> Nomor Handphone:</label>
+                    <input type="text" id="nomor_hp" name="nomor_hp" value=" Diawali dengan 62 "/>
+                    <br/>
+                    <label for="nomor_motor"> Nomor Motor: </label>
+                    <input type="text" id="nomor_motor" name="nomor_motor"/>
+                <br/>
+                <input type="submit" value="Submit"/>
+            </form>
+        </t>
+    </template>
+</flectra>
