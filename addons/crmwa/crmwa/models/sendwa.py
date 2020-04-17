@@ -21,6 +21,10 @@ class Send_Whatsapp:
         result = phone.startswith('0')
         if result:
             phone = '62' + phone[1:]
+        
+        result = phone.startswith('+62')
+        if result:
+            phone = phone[1:]
         return phone
     
     def send_post(self, type_message, type_post):
