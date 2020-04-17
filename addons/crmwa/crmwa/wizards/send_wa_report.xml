@@ -21,8 +21,8 @@
                     </group>
 
                     <footer>
-                        <button string="Confirm" name="confirm_button" type="object" class="btn-primary"/>
-                        <button string="Cancel" class="btn-default" special="cancel" />
+                        <button string="Kirim" name="confirm_button" type="object" class="btn-primary"/>
+                        <button string="Batal" class="btn-default" special="cancel" />
                     </footer>
 
                 </form>

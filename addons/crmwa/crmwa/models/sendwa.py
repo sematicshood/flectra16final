@@ -18,10 +18,10 @@ class Send_Whatsapp:
         return phones
     
     def check_number(self, phone):
+        phone = phone.strip().replace("-","").replace(" ","")
         result = phone.startswith('0')
         if result:
             phone = '62' + phone[1:]
-        
         result = phone.startswith('+62')
         if result:
             phone = phone[1:]
@@ -33,9 +33,12 @@ class Send_Whatsapp:
         for phone in phones:
             phone = self.check_number(phone)
             client_uuid = uuid.uuid1()
-            sendwa = CLIENT.format(type_message, TOKEN, SENDER, phone,
-                                    client_uuid, type_post, self.message)
-            status = requests.post(sendwa)
+            status = 200
+            # sendwa = CLIENT.format(type_message, TOKEN, SENDER, phone,
+            #                         client_uuid, type_post, self.message)
+            # status = requests.post(sendwa)
+            if status != 200:
+                return "gagal"
+
             cek.append(status)
-            
         return cek

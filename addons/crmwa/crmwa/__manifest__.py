@@ -26,6 +26,7 @@
     'data': [
         # 'security/ir.model.access.csv',
         'wizards/send_wa_report.xml',
+        'wizards/get_konsumen_data.xml',
         'menu.xml',
         'views/views.xml',
         'views/templates.xml',

@@ -1,27 +1,32 @@
 <flectra>
 	<data>
 		<record id="action_course_list1" model="ir.actions.act_window">
-			<field name="name">Daftar Costmers</field>
+			<field name="name">Daftar Konsumen</field>
 			<field name="res_model">cmrwa.accounts</field>
 			<field name="view_mode">tree,form</field>
 			<field name="help" type="html">
               <p class="oe_view_nocontent_create">
-                Click to add a Course
+                Click to add manual
               </p>				
-				<p>klik tombol create untuk bikin Course baru</p>
+				<p>klik tombol create untuk membuat data baru manual</p>
 			</field>
 		</record>
 
-
-        <!--tree view of the patient model-->
         <record id="patient_tree" model="ir.ui.view">
             <field name="name">cmrwa.accounts.tree</field>
             <field name="model">cmrwa.accounts</field>
             <field name="arch" type="xml">
                 <tree string="Accounts">
+                    <field name="nama_konsumen"/>
                     <field name="no_wa"/>
                     <field name="no_motor"/>
                     <field name="tanggal_input"/>
+			        <field name="tanggal_h7"/>
+					<field name="tanggal_h3"/>
+                    <field name="tanggal_telpon"/>
+                    <field name="status_whatsapp"/>
+					<field name="status_kedatangan"/>
+					<field name="status_follow_up"/>
                 </tree>
             </field>
         </record>
@@ -35,12 +40,16 @@
 		 parent="crmwa_1"/>
 
 		<menuitem id="crmwa_1_1_2"
-		 action="act_open_vit_efaktur_wizard"
-		 name="Send Daily Whatsapp"
+		 action="act_open_vit_efaktur_wizard2"
+		 name="Ambil Data Konsumen"
 		 sequence="10"
 		 parent="crmwa_1"/>
 
-
+		<menuitem id="crmwa_1_1_3"
+		 action="act_open_vit_efaktur_wizard"
+		 name="Kirim Whatsapp Harian"
+		 sequence="10"
+		 parent="crmwa_1"/>
 
 	</data>
 </flectra>

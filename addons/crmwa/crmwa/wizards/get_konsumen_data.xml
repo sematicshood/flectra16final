@@ -1,0 +1,30 @@
+<flectra>
+    <data>
+
+        <record id="act_open_vit_efaktur_wizard2" model="ir.actions.act_window">
+            <field name="name">Get Data Konsumen</field>
+            <field name="res_model">crmwa.wizards.getkonsumen</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="view_vit_generate_efaktur_form2" model="ir.ui.view">
+            <field name="name">crmwa.wizards.getkonsumen.form</field>
+            <field name="model">crmwa.wizards.getkonsumen</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="eFaktur">
+
+                    <footer>
+                        <button string="Ambil" name="confirm_button2" type="object" class="btn-primary"/>
+                        <button string="Batal" class="btn-default" special="cancel" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+    </data>
+</flectra>
