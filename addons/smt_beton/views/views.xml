@@ -115,31 +115,37 @@
 		<record id= "smt_beton.validate_seven_id" model="ir.actions.act_window">
 			<field name="name">stock.picking.form</field>
 			<field name="res_model">stock.picking</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,form,tree</field>
 			<field name="inherit_id" ref="stock.view_picking_form"/>
 		</record>
 
-    <record id="smt_beton.add_priority" model="ir.ui.view">
-            <field name="name">product.template.invoice.policy</field>
-            <field name="res_model">product.template</field>
-            <field name="inherit_id" ref="account.product_template_form_view"/>
-            <field name="arch" type="xml">
-              <xpath expr="/page/page/group[2]" position="after">
-                            <group string="Payabless" name="payabless">
-                                <field name="addproperty" widget="many2many_tags"/>
-                            </group>
-              </xpath>                
-            </field>
+    <record id="smt_beton.smt_produk_id" model="ir.actions.act_window">
+      <field name="name">product.template.form.inherit</field>
+      <field name="res_model">product.template</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,form,tree</field>
+      <field name="inherit_id" ref="product.product_template_form_view"/>
     </record>
+
+    <record id="smt_beton.smt_invoice_id" model="ir.actions.act_window">
+      <field name="name">account.invoice.form</field>
+      <field name="res_model">account.invoice</field>
+      <field name="view_mode">tree,form</field>
+      <field name="inherit_id" ref="account.invoice_form"/>
+    </record>
+
 
     <!-- Top menu item -->
     <menuitem name="Jormix" id="smt_beton.menu_root"/>
     <!-- menu categories -->
-
     <menuitem name="Dashboard" id="smt_beton.menu_1" parent="smt_beton.menu_root"/>
     <menuitem name="Marketing" id="smt_beton.menu_2" parent="smt_beton.menu_root"/>
     <menuitem name="Produksi" id="smt_beton.menu_3" parent="smt_beton.menu_root"/>
     <menuitem name="Operasional" id="smt_beton.menu_4" parent="smt_beton.menu_root"/>
     <menuitem name="Master Data" id="smt_beton.menu_5" parent="smt_beton.menu_root"/>
+    <menuitem name="Invoicing" id="smt_beton.menu_6" parent="smt_beton.menu_root"/>
+
     <!-- actions -->
     <menuitem name="Marketing" id="smt_beton.menu_1_list" parent="smt_beton.menu_1"
               action="smt_beton.action_marketing_dashboard"/>
@@ -152,6 +158,9 @@
     <menuitem name="Transfer" id="smt_beton.menu_5_list" parent="smt_beton.menu_4"
               action="smt_beton.validate_seven_id"/>
     <menuitem name="Produk" id="smt_beton.menu_6_list" parent="smt_beton.menu_5"
-              action="smt_beton.add_priority"/>
+              action="smt_beton.smt_produk_id"/>
+    <menuitem name="Costumer Invoice" id="smt_beton.menu_7_list" parent="smt_beton.menu_6"
+              action="smt_beton.smt_invoice_id"/>
+
   </data>
 </flectra>

@@ -53,9 +53,27 @@ class ValidateSeven(models.Model):
 
 class AddPriority(models.Model):
     _inherit = 'product.template'
+    pass
 
-    addpriority = fields.Selection([('1', '1'),
-                                ('2', '2'),
-                                ('3','3'),
-                                ('4','4')],
-                                string='Prioritas')
+
+    # addpriority = fields.Selection([('1', '1'),
+    #                             ('2', '2'),
+    #                             ('3','3'),
+    #                             ('4','4')],
+    #                             string='Prioritas')
+
+
+class SmtInvoice(models.Model):
+    _inherit = 'account.invoice'
+
+    pass
+
+
+class SmtPayment(models.Model):
+    _inherit = 'account.payment'
+    _name = "smt.account.register.payments"
+    @api.multi
+    def action_validate_invoice_payment(self):
+        res = super(SmtPayment, self).action_validate_invoice_payment()
+        return resolve_o2m_commands_to_record_dicts
+        
