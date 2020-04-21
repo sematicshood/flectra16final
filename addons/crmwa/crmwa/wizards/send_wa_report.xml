@@ -17,7 +17,11 @@
             <field name="arch" type="xml">
                 <form string="eFaktur">
                     <group colspan="4">
-                        <field name="message"/>
+                        <field name="message_h7"/>
+                    </group>
+
+                    <group colspan="4">
+                        <field name="message_h3"/>
                     </group>
 
                     <footer>

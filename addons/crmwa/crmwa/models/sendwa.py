@@ -39,6 +39,9 @@ class Send_Whatsapp:
             # status = requests.post(sendwa)
             if status != 200:
                 return "gagal"
-
             cek.append(status)
+
         return cek
+
+class Validate_Whatsapp:
+    pass

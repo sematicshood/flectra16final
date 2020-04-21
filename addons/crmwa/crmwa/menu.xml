@@ -20,6 +20,7 @@
                     <field name="nama_konsumen"/>
                     <field name="no_wa"/>
                     <field name="no_motor"/>
+					<field name="tipe_motor"/>
                     <field name="tanggal_input"/>
 			        <field name="tanggal_h7"/>
 					<field name="tanggal_h3"/>
@@ -27,6 +28,9 @@
                     <field name="status_whatsapp"/>
 					<field name="status_kedatangan"/>
 					<field name="status_follow_up"/>
+					<field name="km_akhir"/>
+					<field name="ket"/>
+					<field name="status_call"/>
                 </tree>
             </field>
         </record>

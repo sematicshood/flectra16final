@@ -4,17 +4,6 @@ from flectra import models, fields, api
 from addons.crmwa.crmwa.models.sendwa import Send_Whatsapp
 from datetime import datetime, timedelta
 from flectra.exceptions import except_orm
-# class crmwa(models.Model):
-#     _name = 'crmwa.crmwa'
-
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         self.value2 = float(self.value) / 100
 
 
 class Accounts(models.Model):
@@ -30,18 +19,31 @@ class Accounts(models.Model):
     status_whatsapp = fields.Boolean('Sudah di WA', default=False)
     status_kedatangan = fields.Boolean('Sudah datang', default=False)
     status_follow_up = fields.Char('Status Follow Up')
+    tipe_motor = fields.Char('Tipe Motor')
+    km_akhir = fields.Char('Kilo Meter Akhir')
+    ket = fields.Char('Alasan')
+    status_call = fields.Boolean('Status Telpon', default=False)
 
 class Sendwa(models.TransientModel):
 
     _name = 'crmwa.wizards.sendwa'
     # _inherit = 'cmrwa.accounts'
 
-    message = fields.Char('Message', required=True)
+    message_h7 = fields.Char('Message H7')
+    message_h3 = fields.Char('Message H3')
 
     @api.multi
     def confirm_button(self):
         current_date = datetime.today().strftime('%Y-%m-%d')
-        message = self.message
+        message_h7 = self.message_h7
+        message_h3 = self.message_h3
+        message = ""
+
+        if not message_h7 and not message_h3:
+            raise except_orm('confirm_button','Message tidak boleh kosong!')
+        
+        message = message_h7 = message_h3
+
         accounts = self.env['cmrwa.accounts'].search([])
         phones = []
         for account in accounts:
@@ -50,27 +52,28 @@ class Sendwa(models.TransientModel):
             tanggal_h3 = account.tanggal_h3
             tanggal_telpon = account.tanggal_telpon
             status_kedatangan = account.status_kedatangan
+            status_follow_up = account.status_follow_up
 
             if phone:
-                if (current_date == tanggal_h7) and not status_kedatangan:
+                if (current_date == tanggal_h7) and not status_kedatangan and status_follow_up != 'H-7':
                     account.status_whatsapp = True
                     account.status_follow_up = 'H-7'
                     phones.append(phone)
 
-                elif (current_date == tanggal_h3) and not status_kedatangan:
+                elif (current_date == tanggal_h3) and not status_kedatangan and status_follow_up != 'H-3':
                     account.status_whatsapp = True
                     account.status_follow_up = 'H-3'
                     phones.append(phone)
                 
-                elif (current_date == tanggal_telpon) and not status_kedatangan:
+                elif (current_date == tanggal_telpon) and not status_kedatangan and status_follow_up != 'Ditelpon':
                     account.status_whatsapp = True
                     account.status_follow_up = 'Ditelpon'
+                    account.status_call = True
 
         if phones:
             sender = Send_Whatsapp(phones, message)
             status = sender.send_post('chat', 'text')
             if status == 'gagal':
-                print("masukk", status)
                 raise except_orm('confirm_button','Service whatsapp error, coba restart whatsapp web lagi')
 
 

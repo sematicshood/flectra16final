@@ -7,7 +7,7 @@
         subtitle on modules listing or apps.openerp.com""",
 
     'description': """
-        Long description of module's purpose
+        Module CRMWA digunakan untuk melakukan kirim Whatsapp secara custome individu atau banyak nomor.
     """,
 
     'author': "My Company",
