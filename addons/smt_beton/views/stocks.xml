@@ -1,0 +1,15 @@
+<!-- <flectra>
+  <data>
+  		<!-- Inherit form view to modify it -->
+		<record id= "validate_seven_id" model="ir.ui.view">
+			<field name="name">stock.picking.form</field>
+			<field name="model">stock.picking</field>
+			<field name="inherit_id" ref="stock.view_picking_form"/>
+			<field name="arch" type="xml">
+                <field name="origin" positions="after">
+                    <field name ="test" />
+                </field>
+			</field>
+		</record>
+  </data>
+</flectra> -->

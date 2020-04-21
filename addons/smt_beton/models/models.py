@@ -30,3 +30,32 @@ class AddFieldSaleorder(models.Model):
     _inherit = 'sale.order'
 
     jaraklokasicor = fields.Float()
+
+class ValidateSeven(models.Model):
+    _inherit = 'stock.picking'
+
+    test = fields.Char("Oke")
+
+    @api.multi
+    def button_validate(self):
+        super(ValidateSeven, self).button_validate()
+        self.generate_stoke_move()
+
+    def generate_stoke_move(self):
+        stocks = self.env['stock.move'].search([])
+        cek = []
+        for stock in stocks:
+            reserved_availability = stock.reserved_availability
+            stock.quantity_done = 7
+            if reserved_availability:
+                stock.reserved_availability = stock.reserved_availability - 7
+                cek.append(stock.reserved_availability)
+
+class AddPriority(models.Model):
+    _inherit = 'product.template'
+
+    addpriority = fields.Selection([('1', '1'),
+                                ('2', '2'),
+                                ('3','3'),
+                                ('4','4')],
+                                string='Prioritas')
