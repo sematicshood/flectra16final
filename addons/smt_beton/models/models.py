@@ -56,24 +56,23 @@ class AddPriority(models.Model):
     pass
 
 
-    # addpriority = fields.Selection([('1', '1'),
-    #                             ('2', '2'),
-    #                             ('3','3'),
-    #                             ('4','4')],
-    #                             string='Prioritas')
-
-
 class SmtInvoice(models.Model):
-    _inherit = 'account.invoice'
-
-    pass
-
-
-class SmtPayment(models.Model):
     _inherit = 'account.payment'
-    _name = "smt.account.register.payments"
+
     @api.multi
     def action_validate_invoice_payment(self):
-        res = super(SmtPayment, self).action_validate_invoice_payment()
-        return resolve_o2m_commands_to_record_dicts
+        res = super(SmtInvoice, self).action_validate_invoice_payment()
+        last_id = self.env['account.payment'].search([], order='id desc')[0].id
+        payment = self.env['account.payment'].search([('id', '=', last_id)])
+        invoice_id = payment.invoice_ids.id
+        amount = payment.amount
+        invoices = self.env['account.invoice.line'].search([('invoice_id', '=', invoice_id)])
+        all_price = []
+        for invoice in invoices:
+            price_unit = invoice.price_unit
+            all_price.append(price_unit)
+        print("cek", all_price, amount)
+
+
         
+
