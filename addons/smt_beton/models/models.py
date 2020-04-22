@@ -56,6 +56,10 @@ class AddPriority(models.Model):
     pass
 
 
+class AddChangePrice(models.Model):
+    _inherit = 'account.invoice.line'
+    price_changed = fields.Float(string='Changed Price')
+
 class SmtInvoice(models.Model):
     _inherit = 'account.payment'
 
@@ -66,12 +70,53 @@ class SmtInvoice(models.Model):
         payment = self.env['account.payment'].search([('id', '=', last_id)])
         invoice_id = payment.invoice_ids.id
         amount = payment.amount
-        invoices = self.env['account.invoice.line'].search([('invoice_id', '=', invoice_id)])
-        all_price = []
-        for invoice in invoices:
-            price_unit = invoice.price_unit
-            all_price.append(price_unit)
-        print("cek", all_price, amount)
+        order='price_subtotal desc'
+        invoices = self.env['account.invoice.line'].search([('invoice_id', '=', invoice_id)], order=order )
+        prices = [invoice.price_subtotal for invoice in invoices]
+        sum_price = sum(prices)
+        if amount > sum_price:
+            return         
+
+        res = 0.0
+        is_next = True
+        prices_changes = []
+        for prior, invoice in enumerate(invoices):
+            price_subtotal = invoice.price_subtotal
+            invoice.price_changed = price_subtotal
+            invoice_id = invoice.invoice_id
+            if prior == 0 and is_next:
+                if price_subtotal >= amount:
+                    res = invoice.price_subtotal - amount
+                    invoice.price_changed = res
+                    is_next = False
+                else:
+                    price_subtotal = invoice.price_subtotal
+                    res = amount - price_subtotal
+                    invoice.price_changed = price_subtotal
+
+            elif (res != 0.0 or res != 0) and is_next:
+                price_subtotal = invoice.price_subtotal
+                amount = res
+                if price_subtotal >= amount:
+                    res = price_subtotal - amount
+                    invoice.price_changed = res
+                    is_next = False
+                else:
+                    price_subtotal = invoice.price_subtotal
+                    res = amount - price_subtotal
+                    invoice.price_changed = price_subtotal
+
+
+                
+
+
+
+
+
+
+
+
+
 
 
         
