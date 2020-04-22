@@ -60,6 +60,7 @@ class AddChangePrice(models.Model):
     _inherit = 'account.invoice.line'
     price_changed = fields.Float(string='Changed Price')
 
+
 class SmtInvoice(models.Model):
     _inherit = 'account.payment'
 
@@ -77,34 +78,35 @@ class SmtInvoice(models.Model):
         if amount > sum_price:
             return         
 
+        # change_prices = []
         res = 0.0
-        is_next = True
-        prices_changes = []
         for prior, invoice in enumerate(invoices):
             price_subtotal = invoice.price_subtotal
             invoice.price_changed = price_subtotal
             invoice_id = invoice.invoice_id
-            if prior == 0 and is_next:
+            if prior == 0 and amount:
                 if price_subtotal >= amount:
                     res = invoice.price_subtotal - amount
                     invoice.price_changed = res
-                    is_next = False
+                    amount = 0
                 else:
                     price_subtotal = invoice.price_subtotal
                     res = amount - price_subtotal
-                    invoice.price_changed = price_subtotal
-
-            elif (res != 0.0 or res != 0) and is_next:
+                    invoice.price_changed = 0
+                    amount = res
+            elif (res != 0.0 or res != 0) and amount:
                 price_subtotal = invoice.price_subtotal
-                amount = res
                 if price_subtotal >= amount:
                     res = price_subtotal - amount
                     invoice.price_changed = res
-                    is_next = False
+                    amount = 0
                 else:
                     price_subtotal = invoice.price_subtotal
                     res = amount - price_subtotal
-                    invoice.price_changed = price_subtotal
+                    invoice.price_changed = 0
+                    amount = res
+
+            # change_prices.append(invoice.price_changed)
 
 
                 
