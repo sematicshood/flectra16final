@@ -33,15 +33,13 @@ class Send_Whatsapp:
         for phone in phones:
             phone = self.check_number(phone)
             client_uuid = uuid.uuid1()
-            status = 200
-            # sendwa = CLIENT.format(type_message, TOKEN, SENDER, phone,
-            #                         client_uuid, type_post, self.message)
-            # status = requests.post(sendwa)
-            if status != 200:
+
+            sendwa = CLIENT.format(type_message, TOKEN, SENDER, phone,
+                                    client_uuid, type_post, self.message)
+            status = requests.post(sendwa)
+
+            if status.status_code != 200:
                 return "gagal"
             cek.append(status)
 
         return cek
-
-class Validate_Whatsapp:
-    pass

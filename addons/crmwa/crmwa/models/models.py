@@ -42,8 +42,12 @@ class Sendwa(models.TransientModel):
         if not message_h7 and not message_h3:
             raise except_orm('confirm_button','Message tidak boleh kosong!')
         
-        message = message_h7 = message_h3
-
+        if message_h7:
+            message = message_h7
+        
+        if message_h3:
+            message = message_h3
+            
         accounts = self.env['cmrwa.accounts'].search([])
         phones = []
         for account in accounts:
@@ -53,7 +57,7 @@ class Sendwa(models.TransientModel):
             tanggal_telpon = account.tanggal_telpon
             status_kedatangan = account.status_kedatangan
             status_follow_up = account.status_follow_up
-
+            
             if phone:
                 if (current_date == tanggal_h7) and not status_kedatangan and status_follow_up != 'H-7':
                     account.status_whatsapp = True
