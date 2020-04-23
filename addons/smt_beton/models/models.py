@@ -77,36 +77,46 @@ class SmtInvoice(models.Model):
         sum_price = sum(prices)
         if amount > sum_price:
             return         
-
-        # change_prices = []
+        #200
+        #100,100,25
         res = 0.0
         for prior, invoice in enumerate(invoices):
             price_subtotal = invoice.price_subtotal
             invoice.price_changed = price_subtotal
-            invoice_id = invoice.invoice_id
+            invoice.name = "Kurang " + str(price_subtotal)
+
             if prior == 0 and amount:
                 if price_subtotal >= amount:
                     res = invoice.price_subtotal - amount
                     invoice.price_changed = res
+                    invoice.name = "Kurang " + str(res)
+                    if price_subtotal == amount:
+                        invoice.name = "Lunas"
                     amount = 0
                 else:
                     price_subtotal = invoice.price_subtotal
                     res = amount - price_subtotal
                     invoice.price_changed = 0
                     amount = res
+                    invoice.name = "Lunas"
+                    
+
             elif (res != 0.0 or res != 0) and amount:
                 price_subtotal = invoice.price_subtotal
                 if price_subtotal >= amount:
                     res = price_subtotal - amount
                     invoice.price_changed = res
+                    invoice.name = "Kurang " + str(res)
+                    if price_subtotal == amount:
+                        invoice.name = "Lunas"
                     amount = 0
                 else:
                     price_subtotal = invoice.price_subtotal
                     res = amount - price_subtotal
                     invoice.price_changed = 0
                     amount = res
+                    invoice.name = "Lunas"
 
-            # change_prices.append(invoice.price_changed)
 
 
                 

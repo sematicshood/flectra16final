@@ -133,6 +133,23 @@
       <field name="res_model">account.invoice</field>
       <field name="view_mode">tree,form</field>
       <field name="inherit_id" ref="account.invoice_form"/>
+		  <field name="arch" type="xml">
+      <form string="Vendor Bill">
+                <sheet string="Vendor Bill">
+                    <notebook>
+                        <page string="Bill">
+                            <field context="{'type': type, 'journal_id': journal_id}" name="invoice_line_ids">
+                                <tree string="Bill lines" editable="bottom">
+                                    <field name="quantity" position="after">
+                                        <field name="price_changed"/>
+                                    </field>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+      </form>      
+		  </field>
     </record>
 
 
