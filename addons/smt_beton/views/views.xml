@@ -152,27 +152,30 @@
 		  </field>
     </record>
 
+    <!-- view laporan penjualan  -->
     <record id="smt_beton.smt_laporan_penjualan" model="ir.actions.act_window">
-      <field name="name">crm.opportunity.report.graph</field>
-      <field name="res_model">crm.opportunity.report</field>
-           <field name="view_type">form</field>
-           <field name="view_mode">graph,pivot</field>
+      <field name="name">smt.beton.smt.laporan.penjualan</field>
+      <field name="res_model">sale.order</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">graph,pivot</field>
       <field name="inherit_id" ref="crm.crm_opportunity_report_view_graph"/>
     </record>
 
+    <!-- view laporan penjualan sesuai channel  -->
     <record id="smt_beton.smt_laporan_channel_penjualan" model="ir.actions.act_window">
-      <field name="name">crm.team.dashboard</field>
-      <field name="res_model">crm.team</field>
-           <field name="view_type">form</field>
-           <field name="view_mode">graph,pivot</field>
+      <field name="name">smt.beton.smt.laporan.channel.penjualan</field>
+      <field name="res_model">sale.order</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">graph,pivot</field>
       <field name="inherit_id" ref="sales_team.crm_team_salesteams_view_kanban"/>
     </record>
 
+    <!-- view sprint pada scrum  -->
     <record id="smt_beton.smt_sprint_scrum" model="ir.actions.act_window">
-      <field name="name">project.sprint.kanban</field>
+      <field name="name">smt.beton.smt.sprint.scrum</field>
       <field name="res_model">project.sprint</field>
-           <field name="view_type">form</field>
-           <field name="view_mode">kanban,form,tree,calendar</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,form,tree,calendar</field>
       <field name="inherit_id" ref="project_scrum.view_project_sprint_kanban"/>
     </record>
 

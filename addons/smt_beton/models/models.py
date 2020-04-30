@@ -77,8 +77,7 @@ class SmtInvoice(models.Model):
         sum_price = sum(prices)
         if amount > sum_price:
             return         
-        #200
-        #100,100,25
+
         res = 0.0
         for prior, invoice in enumerate(invoices):
             price_subtotal = invoice.price_subtotal
@@ -118,14 +117,29 @@ class SmtInvoice(models.Model):
                     invoice.name = "Lunas"
 
 
-
-                
-
-
+class ChangeScrum(models.Model):
+    _inherit = 'project.sprint'
 
 
 
+class UpdateScrum(models.Model):
+    _inherit = 'project.sprint'
+    _name = 'smt.update.scrum'
 
+    @api.multi
+    def add_sale_order(self):
+        sales = self.env['sale.order'].search([])
+        for sale in sales:
+            user_id = sale.user_id
+            partner_id = sale.partner_id
+            name = sale.name
+            if name:
+                data = {
+                    "name":name,
+                    "partner_id":partner_id,
+                    "user_id":user_id
+                    }
+                self.env['project.project'].create(data)
 
 
 
