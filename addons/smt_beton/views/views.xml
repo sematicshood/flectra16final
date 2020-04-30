@@ -179,6 +179,32 @@
       <field name="inherit_id" ref="project_scrum.view_project_sprint_kanban"/>
     </record>
 
+    <!-- view sprint pada scrum  -->
+    <record id="smt_beton.smt_update_sprint" model="ir.actions.act_window">
+        <field name="name">smt.update.scrum.tree</field>
+        <field name="res_model">smt.update.scrum</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_vit_generate_efaktur_form2" model="ir.ui.view">
+        <field name="name">smt.update.scrum.form</field>
+        <field name="model">smt.update.scrum</field>
+        <field name="type">form</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="eFaktur">
+
+                <footer>
+                    <button string="Ambil" name="add_sale_order" type="object" class="btn-primary"/>
+                    <button string="Batal" class="btn-default" special="cancel" />
+                </footer>
+
+            </form>
+        </field>
+    </record>
+
     <!-- Top menu item -->
     <menuitem name="Jormix" id="smt_beton.menu_root"/>
     <!-- menu categories -->
@@ -212,5 +238,7 @@
               action="smt_beton.smt_laporan_channel_penjualan"/>
     <menuitem name="Sprint" id="smt_beton.menu_10_list" parent="smt_beton.menu_8"
               action="smt_beton.smt_sprint_scrum"/>
+    <menuitem name="Update Sprint" id="smt_beton.menu_11_list" parent="smt_beton.menu_8"
+              action="smt_beton.smt_update_sprint"/>
   </data>
 </flectra>

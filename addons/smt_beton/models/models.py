@@ -123,7 +123,6 @@ class ChangeScrum(models.Model):
 
 
 class UpdateScrum(models.Model):
-    _inherit = 'project.sprint'
     _name = 'smt.update.scrum'
 
     @api.multi
@@ -132,18 +131,17 @@ class UpdateScrum(models.Model):
         for sale in sales:
             user_id = sale.user_id
             partner_id = sale.partner_id
-            name = sale.name
-            if name:
-                data = {
-                    "name":name,
-                    "partner_id":partner_id,
-                    "user_id":user_id
-                    }
-                self.env['project.project'].create(data)
-
-
-
-
-
-        
+            company_id = sale.company_id
+            lines = sale.order_line
+            for line in lines:
+                line_id= line.id
+                item = self.env['sale.order.line'].search([('id', '=', line_id)])
+                name = item.name
+                project_name = self.env['project.project'].search([('name', '=', name),('user_id','=', user_id.id)])
+                if not project_name:
+                    data = {"name":name,
+                        "partner_id":partner_id.id,
+                        "user_id":user_id.id,
+                        "company_d":company_id.id}
+                    self.env['project.project'].create(data)
 
