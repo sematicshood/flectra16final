@@ -55,8 +55,9 @@
         </tree>
       </field>
     </record>
+    
     <!-- explicit dashboard marketing view  -->
-    <record id="view_dashboard_marketing_kanban" model="ir.ui.view">
+    <!-- <record id="view_dashboard_marketing_kanban" model="ir.ui.view">
         <field name="name">sale.order.kanban</field>
         <field name="model">sale.order</field>
         <field name="arch" type="xml">
@@ -82,36 +83,42 @@
                 </templates>
             </kanban>
         </field>
-    </record>
+    </record> -->
     <!-- actions opening views on models -->
 
-    <record model="ir.actions.act_window" id="smt_beton.action_window">
-      <field name="name">smt_beton window</field>
-      <field name="res_model">smt_beton.smt_beton</field>
-      <field name="view_mode">tree,form</field>
+
+    <!-- view sprint pada Dashboard marketing  -->
+    <record id="smt_beton.action_marketing_dashboard" model="ir.actions.act_window">
+      <field name="name">action.marketing.dashboard.tree</field>
+      <field name="res_model">project.sprint</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,form,tree,calendar</field>
+      <field name="inherit_id" ref="project_scrum.view_project_sprint_kanban"/>
     </record>
+
+
     <!-- actions opening views on daftar konsumen -->
     <record model="ir.actions.act_window" id="smt_beton.data_konsumen">
       <field name="name">Data Konsumen</field>
       <field name="res_model">res.partner</field>
       <field name="view_mode">tree,form</field>
     </record>
+
     <!-- actions opening views on daftar konsumen -->
     <record model="ir.actions.act_window" id="smt_beton.data_proyek">
       <field name="name">Data Proyek</field>
       <field name="res_model">sale.order</field>
       <field name="view_mode">tree,form</field>
     </record>
-    <!-- action untuk memanggil dashboard -->
 
-    <record id="action_marketing_dashboard" model="ir.actions.act_window">
-        <field name="name">Marketing Dashboard</field>
-        <field name="res_model">sale.order</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">kanban,form,tree</field>
-        <field name="view_id" ref="view_dashboard_marketing_kanban"/>
+    <!-- actions opening views on jadwal produksi -->
+    <record model="ir.actions.act_window" id="smt_beton.jadwal_produksi">
+      <field name="name">smt_beton window</field>
+      <field name="res_model">smt_beton.smt_beton</field>
+      <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- actions opening views on validate_seven_id -->
 		<record id= "smt_beton.validate_seven_id" model="ir.actions.act_window">
 			<field name="name">stock.picking.form</field>
 			<field name="res_model">stock.picking</field>
@@ -120,6 +127,7 @@
 			<field name="inherit_id" ref="stock.view_picking_form"/>
 		</record>
 
+    <!-- actions opening views on produk_id -->
     <record id="smt_beton.smt_produk_id" model="ir.actions.act_window">
       <field name="name">product.template.form.inherit</field>
       <field name="res_model">product.template</field>
@@ -128,6 +136,7 @@
       <field name="inherit_id" ref="product.product_template_form_view"/>
     </record>
 
+    <!-- actions opening views on price change -->
     <record id="smt_beton.smt_invoice_id" model="ir.actions.act_window">
       <field name="name">account.invoice.form</field>
       <field name="res_model">account.invoice</field>
@@ -188,6 +197,7 @@
         <field name="target">new</field>
     </record>
 
+    <!-- view sprint pada wizards scrum  -->
     <record id="view_vit_generate_efaktur_form2" model="ir.ui.view">
         <field name="name">smt.update.scrum.form</field>
         <field name="model">smt.update.scrum</field>
@@ -225,7 +235,7 @@
     <menuitem name="Proyek" id="smt_beton.menu_3_list" parent="smt_beton.menu_2"
               action="smt_beton.data_proyek"/>
     <menuitem name="Jadwal Produksi" id="smt_beton.menu_4_list" parent="smt_beton.menu_3"
-              action="smt_beton.action_window"/>
+              action="smt_beton.jadwal_produksi"/>
     <menuitem name="Transfer" id="smt_beton.menu_5_list" parent="smt_beton.menu_4"
               action="smt_beton.validate_seven_id"/>
     <menuitem name="Produk" id="smt_beton.menu_6_list" parent="smt_beton.menu_5"
