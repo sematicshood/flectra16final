@@ -31,6 +31,7 @@
 					<field name="km_akhir"/>
 					<field name="ket"/>
 					<field name="status_call"/>
+					<field name="terkirim"/>
                 </tree>
             </field>
         </record>

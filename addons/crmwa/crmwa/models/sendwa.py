@@ -9,13 +9,6 @@ class Send_Whatsapp:
     def __init__(self, receiver, message):
         self.receiver = receiver
         self.message = message
-
-    def check_list(self):
-        phones = self.receiver
-        check_list = isinstance(phones, list)
-        if not check_list:
-            phones = [phones]
-        return phones
     
     def check_number(self, phone):
         phone = phone.strip().replace("-","").replace(" ","")
@@ -28,18 +21,24 @@ class Send_Whatsapp:
         return phone
     
     def send_post(self, type_message, type_post):
-        phones = self.check_list()
-        cek = []
-        for phone in phones:
-            phone = self.check_number(phone)
-            client_uuid = uuid.uuid1()
-
-            sendwa = CLIENT.format(type_message, TOKEN, SENDER, phone,
+        phone =  self.receiver
+        phone = self.check_number(phone)
+        client_uuid = uuid.uuid1()
+        print("message ", self.message)
+        sendwa = CLIENT.format(type_message, TOKEN, SENDER, phone,
                                     client_uuid, type_post, self.message)
-            status = requests.post(sendwa)
+        status = requests.post(sendwa)
+        status_code = status.status_code
+        return status_code
 
-            if status.status_code != 200:
-                return "gagal"
-            cek.append(status)
-
-        return cek
+    def send_image(self, type_message, type_post):
+        phone =  self.receiver
+        phone = self.check_number(phone)
+        client_uuid = uuid.uuid1()
+        print("message ", self.message)
+        sendwa = CLIENT.format(type_message, TOKEN, SENDER, phone,
+                                    client_uuid, type_post, self.message)
+        status = requests.post(sendwa)
+        status_code = status.status_code
+        return status_code
+        

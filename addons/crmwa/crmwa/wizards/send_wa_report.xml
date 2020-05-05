@@ -17,13 +17,16 @@
             <field name="arch" type="xml">
                 <form string="eFaktur">
                     <group colspan="4">
-                        <field name="message_h7"/>
+                        <field name="message_h7" style="width:400px;"/>
                     </group>
 
                     <group colspan="4">
-                        <field name="message_h3"/>
+                        <field name="message_h3" style="width:400px;"/>
                     </group>
-
+                    <group colspan="4">
+                        <!-- <field name="new_image" widget='image'/> -->
+                        <field name="url_image" style="width:400px;"/>
+                    </group>
                     <footer>
                         <button string="Kirim" name="confirm_button" type="object" class="btn-primary"/>
                         <button string="Batal" class="btn-default" special="cancel" />
