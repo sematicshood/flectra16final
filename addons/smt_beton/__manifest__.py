@@ -27,7 +27,10 @@
         'views/assets.xml',
         'views/views.xml',
         'views/templates.xml',
-        'views/stocks.xml'
+        'views/stocks.xml',
+        'reports/report.xml',
+        'reports/konsumen_card.xml',
+        'reports/proyek_card.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

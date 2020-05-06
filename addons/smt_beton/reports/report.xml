@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <report
+        id="report_data_konsumen"
+        string="Laporan Data Konsumen"
+        model="res.partner"
+        report_type="qweb-pdf"
+        name="smt_beton.report_konsumen"
+        file="smt_beton.report_konsumen"/>
+
+    <report
+        id="report_data_proyek"
+        string="Laporan Data Proyek"
+        model="sale.order"
+        report_type="qweb-pdf"
+        name="smt_beton.report_proyek"
+        file="smt_beton.report_proyek"/>
+</flectra>
