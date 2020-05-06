@@ -107,7 +107,7 @@ class TestSaleTimesheet(CommonTest):
         task_serv3 = self.env['project.task'].search([('sale_line_id', '=', so_line_ordered_task_new_project.id)])
         self.assertEqual(sale_order.invoice_status, 'to invoice', 'Sale Timesheet: Adding a new service line (so line) should put the SO in "to invocie" state.')
         self.assertEqual(sale_order.tasks_count, 2, "Two tasks (1 per SO line) should have been created on SO confirmation")
-
+        
         # create invoice
         invoice_id = sale_order.action_invoice_create()
         invoice = self.env['account.invoice'].browse(invoice_id)

@@ -800,7 +800,6 @@ class SaleOrderLine(models.Model):
             total_sale_line = line.price_total
             if line.product_id.invoice_policy == 'delivery':
                 total_sale_line = line.price_reduce_taxinc * line.qty_delivered
-
             line.amt_invoiced = invoiced_amount_total - refund_amount_total
             line.amt_to_invoice = (total_sale_line - invoiced_amount_total) if line.state in ['sale', 'done'] else 0.0
 

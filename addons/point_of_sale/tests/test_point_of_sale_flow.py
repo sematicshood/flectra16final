@@ -52,6 +52,7 @@ class TestPointOfSaleFlow(TestPointOfSaleCommon):
         # I check that the total of the order is equal to 450*2 + 300*3*1.05
         # and the tax of the order is equal to 900 -(450 * 2 / 1.1) +
         # 300*0.05*3
+
         self.assertLess(
             abs(self.pos_order_pos0.amount_total - (450 * 2 + 300 * 3 * 1.05)),
             0.01, 'The order has a wrong amount, tax included.')

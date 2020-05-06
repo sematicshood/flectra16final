@@ -29,7 +29,7 @@ class SaleOrder(models.Model):
         partner_credit_limit = (partner.credit_limit - debit) + credit
         available_credit_limit = ((partner_credit_limit -
                                    (amount_total - debit)) + self.amount_total)
-
+        print("cekkkkkkkkkkkkk")
         if (amount_total - debit) > partner_credit_limit:
             if not partner.over_credit:
                 msg = 'Your available credit limit'\
