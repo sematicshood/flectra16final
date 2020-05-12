@@ -2,7 +2,7 @@
 
 from flectra import models, fields, api
 from flectra import exceptions
-
+import uuid
 
 class SmtBeton(models.Model):
     _name = 'smt_beton.smt_beton'
@@ -20,10 +20,12 @@ class SmtBeton(models.Model):
 class AddFieldResPartner(models.Model):
     _inherit = 'res.partner'
 
-    noktp = fields.Char()
-    nosiup = fields.Char()
-    notdp = fields.Char()
-    noptkp = fields.Char()
+    x_kode_konsumen = fields.Char("Kode Konsumen", default=str(uuid.uuid4().fields[-1])[:5])
+
+    # noktp = fields.Char("NO ktp")
+    # nosiup = fields.Char()
+    # notdp = fields.Char()
+    # noptkp = fields.Char()
 
 
 class AddFieldSaleorder(models.Model):

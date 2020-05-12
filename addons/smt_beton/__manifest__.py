@@ -19,7 +19,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale', 'mrp','product','account','website'],
+    'depends': ['base', 'sale', 'mrp','product','account','website','contacts'],
 
     # always loaded
     'data': [
@@ -30,7 +30,8 @@
         'views/stocks.xml',
         'reports/report.xml',
         'reports/konsumen_card.xml',
-        'reports/proyek_card.xml'
+        'reports/proyek_card.xml',
+        # 'views/respartner.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

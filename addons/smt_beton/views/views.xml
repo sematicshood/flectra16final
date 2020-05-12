@@ -15,7 +15,7 @@
     </record>
     <!-- explicit list view data konsumen -->
 
-    <record model="ir.ui.view" id="smt_beton.konsumen">
+    <!-- <record model="ir.ui.view" id="smt_beton.konsumen">
       <field name="name">Data Konsumen</field>
       <field name="model">res.partner</field>
       <field name="arch" type="xml">
@@ -34,7 +34,7 @@
           <field name="active" invisible="1"/>
         </tree>
       </field>
-    </record>
+    </record> -->
     <!-- explicit list view data konsumen -->
 
     <record model="ir.ui.view" id="smt_beton.proyek">
@@ -96,13 +96,35 @@
       <field name="inherit_id" ref="project_scrum.view_project_sprint_kanban"/>
     </record>
 
-
     <!-- actions opening views on daftar konsumen -->
-    <record model="ir.actions.act_window" id="smt_beton.data_konsumen">
+    <!-- <record model="ir.actions.act_window" id="smt_beton.data_konsumen">
       <field name="name">Data Konsumen</field>
       <field name="res_model">res.partner</field>
       <field name="view_mode">tree,form</field>
-    </record>
+    </record> -->
+
+    <record id="smt_beton.data_konsumen" model="ir.actions.act_window">
+        	<field name="name">res.partner.inherit</field>
+        	<field name="res_model">res.partner</field>
+        	<field name="inherit_id" ref="base.view_partner_form"/>
+        	<field name="arch" type="xml">
+				    <xpath expr="//field[@name='website']" position="after">
+					    <field name="x_kode_konsumen" string="Kode Konsumen"/>
+				    </xpath>
+        	</field>
+  </record>
+
+  <record id="smt_beton.data_konsumen_tree" model="ir.ui.view">
+      <field name="name">res.partner.tree.inherit</field>
+      <field name="res_model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_tree" />
+      <field name="arch" type="xml">
+				  <xpath expr="//field[@name='email']" position="after">
+					  <field name="x_kode_konsumen" />
+				  </xpath>
+      </field>
+  </record>
+
 
     <!-- actions opening views on daftar konsumen -->
     <record model="ir.actions.act_window" id="smt_beton.data_proyek">
@@ -112,11 +134,18 @@
     </record>
 
     <!-- actions opening views on jadwal produksi -->
-    <record model="ir.actions.act_window" id="smt_beton.jadwal_produksi">
+    <!-- <record model="ir.actions.act_window" id="smt_beton.jadwal_produksi">
       <field name="name">smt_beton window</field>
       <field name="res_model">smt_beton.smt_beton</field>
       <field name="view_mode">tree,form</field>
+    </record> -->
+
+    <record model="ir.actions.act_window" id="smt_beton.jadwal_produksi">
+      <field name="name">Jadwal Produksi</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">tree,form</field>
     </record>
+
 
     <!-- actions opening views on validate_seven_id -->
 		<record id= "smt_beton.validate_seven_id" model="ir.actions.act_window">
