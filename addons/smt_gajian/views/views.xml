@@ -1,0 +1,63 @@
+<flectra>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="smt_gajian.list">
+      <field name="name">Proses Gajian</field>
+      <field name="model">smt_gajian.smtgajian</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="tanggal"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="smt_gajian.form_smt_gajian">
+            <field name="name">Form Rekap Insentif</field>
+            <field name="model">smt_gajian.smtgajian</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="tanggal" string="Tanggal awal"/>
+                            <field name="tanggal2" string="Tanggal akhir"/>
+                        </group>
+                        <button string="Rekap" icon="fa-print" type="object" name="hitungInsentif"/>
+                        <notebook position="inside">
+                            <page string="Preview">
+                                <pre>
+                                    
+                                </pre>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="smt_gajian.action_window">
+      <field name="name">smt_gajian window</field>
+      <field name="res_model">smt_gajian.smtgajian</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Penggajian" id="smt_gajian.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Insentif" id="smt_gajian.menu_1" parent="smt_gajian.menu_root"/>
+    <menuitem name="Rekap Gaji" id="smt_gajian.menu_2" parent="smt_gajian.menu_root"/>
+    <menuitem name="Proses Insentif" id="smt_gajian.menu_1_config" parent="smt_gajian.menu_1"
+              action="smt_gajian.action_window"/>
+    
+    <!-- actions -->
+  </data>
+</flectra>

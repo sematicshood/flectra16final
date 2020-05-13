@@ -1,0 +1,49 @@
+<flectra>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="simontir.list_tipemotor">
+            <field name="name">Daftar Tipe Motor</field>
+            <field name="model">simontir.jeniskendaraan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="merk"/>
+                    <field name="kapmesin"/>
+                    <field name="transmisi"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+        <!-- explicit Form definition -->
+        <record model="ir.ui.view" id="simontir.form_tipemotor">
+            <field name="name">Data tipe Motor</field>
+            <field name="model">simontir.jeniskendaraan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="type"/>
+                            <field name="merk"/>
+                            <field name="kapmesin"/>
+                            <field name="transmisi"/>
+                            <field name="company_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="simontir.action_window_tipemotor">
+            <field name="name">Tipe Motor</field>
+            <field name="res_model">simontir.jeniskendaraan</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Tipe Motor" id="tipemotor" parent="simontir.menu_1" action="simontir.action_window_tipemotor"/>
+    </data>
+</flectra>

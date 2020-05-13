@@ -1,0 +1,57 @@
+<flectra>
+    <data noupdate="0">
+        <record id="template_print_laporan" model="mail.template">
+            <field name="name">Laporan Harian Bengkel</field>
+            <field name="model_id" ref="simontir.model_simontir_lapharian"/>
+            <field name="subject">Laporan Harian</field>
+            <field name="body_html"><![CDATA[
+${object.company.name}
+${'Tanggal Lap :'.ljust(11)} ${object.tglLap} ${'Admin :'.ljust(11)} ${object.kasir.name.ljust(8)}
+${'Modal Awal :'.rjust(46)} ${"{:4,.0f}".format(object.saldoawal).rjust(33) if object.saldoawal else '0'.rjust(33)}
+${''.rjust(80, '_')}
+${'I. Laporan Pendapatan Bengkel'.ljust(33)}${'|'.rjust(1)}${'V. Total Pendapatan Bengkel'.ljust(46)}
+${'Jasa Non KPB'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.omsetJasa).rjust(11) if object.omsetJasa else '0'.rjust(11)}${'|'.rjust(1)}${'Total Omset'.ljust(22)}${':'.rjust(1)}${"{:4,.0f}".format(object.omsetgrandtotal).rjust(11) if object.omsetgrandtotal else '0'.rjust(11)}
+${'Total Jasa KPB'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.omsetKpb).rjust(11) if object.omsetKpb else '0'.rjust(11)}${'|'.rjust(1)}${'Biaya Harian Non Part'.ljust(22)}${':'.rjust(1)}${"{:4,.0f}".format(object.biayaHarian).rjust(11) if object.biayaHarian else '0'.rjust(11)}
+${'Injektor Cleaner(CR)'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.totalcr).rjust(11) if object.totalcr else '0'.rjust(11)}${'|'}${'Beli Part'.ljust(22)}${':'.rjust(1)}${"{:4,.0f}".format(object.totalpopart).rjust(11) if object.totalpopart else '0'.rjust(11)}
+${'TOTAL PENJUALAN JASA'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.omsetTotalJasa).rjust(11) if object.omsetTotalJasa else '0'.rjust(11)}${'|'}${'Laba Kotor Hari ini'.ljust(22)}${':'.rjust(1)}${"{:4,.0f}".format(object.labaharian).rjust(11) if object.labaharian else '0'.rjust(11)}
+${''.rjust(80, '_')}
+${'II. Penjualan Part '.ljust(33)}${'|'.rjust(1)}${'VI. Posisi Uang Kas'.ljust(46)}
+${'Pendapatan Parts'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.omsetPart).rjust(11) if object.omsetPart else '0'.rjust(11)}${'|'}${'Total Bank (EDC)'.ljust(22)}${':'.rjust(1)}${"{:4,.0f}".format(object.totalbank).rjust(11) if object.totalbank else '0'}
+${'Pend. Oli Non KPB'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.omsetPartOli).rjust(11) if object.omsetPartOli else '0'.rjust(11)}${'|'}${'Total Kas'.ljust(22)}${':'.rjust(1)}${"{:4,.0f}".format(object.totalkas).rjust(11) if object.totalkas else '0'}
+${'Pend. Oli KPB'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.omsetKpbOli).rjust(11) if object.omsetKpbOli else '0'.rjust(11)}${'|'}${'Total Biaya Harian'.ljust(22)}${':'.rjust(1)}${"{:4,.0f}".format(object.totalbiaya).rjust(11) if object.totalbiaya else '0'.rjust(11)}
+${'Pend. Busi'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.omsetPartBusi).rjust(11) if object.omsetPartBusi else '0'.rjust(11)}${'|'}${'Total Counter'.ljust(22)}${':'.rjust(1)}${"{:4,.0f}".format(object.omsetPos).rjust(11) if object.omsetPos else '0'.rjust(11)}
+${'TOTAL PENJUALAN PART'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.omsetTotalPart).rjust(11) if object.omsetTotalPart else '0'}${'|'}${'Pendapatan Bersih'.ljust(22)}${':'.rjust(1)}${"{:4,.0f}".format(object.totalkasnet).rjust(11) if object.totalkasnet else '0'.rjust(11)} ${"{:4,.0f}".format(object.totalkasnet).rjust(11) if object.totalkasnet else '0'.rjust(11)}
+${' '.ljust(33)}${'|'}${''.rjust(46, '-')}
+${'III. Penjualan Part Counter'.ljust(33)}${'|'.rjust(1)}${'Uang Kas'.rjust(32)}${"{:4,.0f}".format(object.uangkashrini).rjust(14) if object.uangkashrini else '0'.rjust(14)}
+${'Penjualan Part'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.totalpospart).rjust(11) if object.totalpospart else '0'.rjust(11)}${'|'}${'Setor Bank'.rjust(32)}${"{:4,.0f}".format(object.setoranbank).rjust(14) if object.setoranbank else '0'.rjust(14)}
+${'Penjualan Oli'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.totalposoli).rjust(11) if object.totalposoli else '0'.rjust(11)}${'|'}${''.rjust(46, '-')}
+${'Penjualan Busi'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.totalposbusi).rjust(11) if object.totalposbusi else '0'.rjust(11)}${'|'}${'Saldo Kas Harian'.rjust(32)}${"{:4,.0f}".format(object.saldoakhirhrini).rjust(14) if object.saldoakhirhrini else '0'.rjust(14)}
+${'TOTAL PENJ. COUNTER'.ljust(21)}${':'.rjust(1)}${"{:4,.0f}".format(object.omsetPos).rjust(11) if object.omsetPos else '0'.rjust(11)}${'|'}${'Fisik Uang'.rjust(32)}${"{:4,.0f}".format(object.fisikuang).rjust(14) if object.fisikuang else '0'.rjust(14)}
+${''.rjust(33)}${'|'}${''.rjust(46, '_')}
+${''.rjust(33)}${'|'}${'Selisih (+/-)'.rjust(32)}${"{:4,.0f}".format(object.selisih).rjust(14) if object.selisih else '0'.rjust(14)}
+${''.rjust(80, '_')}
+${'IV. Summary Unit entri'.ljust(33)}${'|'.rjust(1)} ${'XII. Rincian UE Per Kategori'.ljust(46)}
+${'Total UE'.ljust(10)}${':'.rjust(1)}${"{:4,.0f}".format(object.totalue).rjust(3) if object.totalue else '0'} ${'Total Cuci'.ljust(13)}${':'.rjust(1)}${object.totalcuci if object.totalcuci else '0'.rjust(3)}${'|'}${'ASSI'.ljust(6)}${':'.rjust(1)}${object.totalAss1 if object.totalAss1 else '0'.ljust(4)} ${'ASSII'.ljust(6)}${':'.rjust(1)}${object.totalAss2 if object.totalAss2 else '0'.rjust(3)} ${'ASSIII'.ljust(6)}${':'.rjust(1)}${object.totalAss3 if object.totalAss3 else '0'.rjust(4)} ${'ASSIV'.ljust(6)}${':'.rjust(1)}${object.totalAss4 if object.totalAss4 else '0'.rjust(3)}
+${'Ak. UE/Bln'.ljust(10)}${':'.rjust(1)}${"{:4,.0f}".format(object.totaluemtd).rjust(3) if object.totaluemtd else '0'}${' '.ljust(13)}${' '.rjust(4)}${'|'}${'GO'.ljust(6)}${':'.rjust(1)}${object.totalGo if object.totalGo else '0'.ljust(4)} ${'GP'.ljust(6)}${':'.rjust(1)}${object.totalGop if object.totalGop else '0'.rjust(3)} ${'HR'.ljust(6)}${':'.rjust(1)}${object.totalHr if object.totalHr else '0'.rjust(4)} ${'SL'.ljust(6)}${':'.rjust(1)}${object.totalSl if object.totalSl else '0'.rjust(3)}
+${'Ak. BS/Bln'.ljust(10)}${':'.rjust(1)}${"{:4,.0f}".format(object.totalbsmtd).rjust(3) if object.totalbsmtd else '0'}${''.ljust(13)}${' '.rjust(4)} ${'|'}${'PX'.ljust(6)}${':'.rjust(1)}${object.totalQs if object.totalQs else '0'.ljust(4)} ${'JR'.ljust(6)}${':'.rjust(1)}${object.totalJr if object.totalJr else '0'.rjust(3)} ${'CL'.ljust(6)}${':'.rjust(1)}${object.totalClaim if object.totalClaim else '0'.rjust(4)} ${'LR'.ljust(6)}${':'.rjust(1)}${object.totalSr if object.totalSr else '0'.rjust(4)}
+${''.rjust(33)}${'|'}${'Reg'.ljust(6)}${':'.rjust(1)}${object.totalreg if object.totalreg else '0'} ${'BS'.ljust(6)}${':'.rjust(1)}${object.totalBs if object.totalBs else '0'.rjust(3)}${'PX'.ljust(6)}${':'.rjust(1)}${object.totalpit if object.totalpit else '0'.ljust(4)} ${'FT'.ljust(6)}${':'.rjust(1)}${object.totalft if object.totalft else '0'.ljust(4)}
+${''.rjust(80, '_')}
+${'VII. Daftar Nota Blm Lunas'.ljust(30)}
+${object.notpaidinv}
+${'VIII. Daftar Kemarin bayar hari ini'.ljust(30)}
+${object.lateinv}
+${'IX. Rincian Biaya Non Part'.ljust(30)}
+${object.listbiayaharian}
+${'Total Biaya Harian'.rjust(36)} ${"{:4,.0f}".format(object.biayaHarian).rjust(11) if object.biayaHarian else '0'.rjust(11)}
+${'X. Rincian Pembelian Part'.ljust(30)}
+${object.listbelipart}
+${'Total Biaya Part'.rjust(36)} ${"{:4,.0f}".format(object.totalpopart).rjust(11) if object.totalpopart else '0'.rjust(11)}
+${'XI. Rincian Transaksi EDC'.ljust(30)}
+${object.listedc}
+${'Total EDC'.rjust(36)} ${"{:4,.0f}".format(object.totalbank).rjust(11) if object.totalbank else '0'}
+${''.rjust(80, '_')}
+${'Catatan :'.ljust(11)} ${object.catatan if object.catatan else '0'.rjust(60)}
+]]></field>
+        </record>
+    </data>
+</flectra>

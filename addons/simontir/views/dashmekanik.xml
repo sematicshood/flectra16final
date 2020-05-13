@@ -1,0 +1,42 @@
+<flectra>
+    <data noupdate="0">
+        <!-- actions opening views with pivot mode -->
+        <record model="ir.ui.view" id="simontir.dashmekanik">
+            <field name="name">Produktifitas </field>
+            <field name="model">simontir.rekapproduktifitasharian</field>
+            <field name="arch" type="xml">
+                <pivot string ="Produktifitas">
+                    <field name ="tanggal" type="col"/>
+                    <field name="nama" type="row"/>
+                    <field name="sparepart" type="col"/>
+                    <field name="jasa" type="measure"/>
+                    <field name="oli" type="measure"/>
+                    <field name="busi" type="measure"/>
+                    <field name="carbon_remover" type="measure"/>
+                    <field name="ass1" type="measure"/>
+                    <field name="ass2" type="measure"/>
+                    <field name="ass3" type="measure"/>
+                    <field name="ass4" type="measure"/>
+                    <field name="go" type="measure"/>
+                    <field name="hr" type="measure"/>
+                    <field name="sl" type="measure"/>
+                    <field name="sr" type="measure"/>
+                    <field name="jr" type="measure"/>
+                    <field name="cl" type="measure"/>
+                    <field name="oj" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+        <!-- Filtering and grouping -->
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="simontir.action_window_dashmekanik">
+            <field name="name">Dashboard Mekanik</field>
+            <field name="res_model">simontir.rekapproduktifitasharian</field>
+            <field name="view_mode">pivot</field>
+        </record>
+        <menuitem name="Dashboard Harian" id="simontir_dashboard" parent="simontir.menu_2"
+              action="simontir.action_window_dashmekanik"/>
+    </data>
+</flectra>

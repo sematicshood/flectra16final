@@ -1,0 +1,279 @@
+<flectra>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="smt_gajian.list_pargaji">
+            <field name="name">Parameter Insentif</field>
+            <field name="model">smt_gajian.pargaji</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="company"/>
+                    <field name="tglberlaku"/>
+                </tree>
+            </field>
+        </record>
+        <!-- explicit Form definition -->
+        <record model="ir.ui.view" id="smt_gajian.form_pargaji">
+            <field name="name">Form Parameter Insentif</field>
+            <field name="model">smt_gajian.pargaji</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="4">
+                            <field name="tglberlaku"/>
+                            <field name="company"/>
+                            <field name="pxcr" string="Ins CR"/>
+                            <field name="pxcuci" string="Ins Cuci"/>
+                            <field name="pxhr" string="Ins Heavy Repair(%)"/>
+                        </group>
+                        <notebook position="inside">
+                            <page string="Insentif Jasa">
+                              <pre>
+                                <span>Rumus perhitungan insentif sebagai berikut :
+                                Jika totaljasa lebih dari Batas 1 
+                                maka totaljasa * X 1
+                                atau Batas 1 kurang dari totaljasa kurang dari Batas 2
+                                maka totaljasa * X 2
+                                atau Batas 3 kurang dari totaljasa kurang dari Batas 4
+                                maka totaljasa * X 2
+                                atau totaljasa lebih dari Batas 4
+                                maka totaljasa * X 3</span>
+                              </pre>
+                                <group col="2">
+                                    <group string="Mekanik">
+                                      <group>
+                                        <field name="pjasamek" string="Pembagi"/>
+                                        <field name="rjasamek1" string="Batas 1"/>
+                                        <field name="rjasamek2" string="Batas 2"/>
+                                        <field name="rjasamek3" string="Batas 3"/>
+                                        <field name="rjasamek4" string="Batas 4"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxjasamek1" string="X 1"/>
+                                        <field name="pxjasamek2" string="X 2"/>
+                                        <field name="pxjasamek3" string="X 3"/>
+                                        <field name="pxjasamek4" string="X 4"/>
+                                      </group>
+                                    </group>
+                                    <group string="Service Advisor (FI)">
+                                      <group>
+                                        <field name="pjasasad" string="Pembagi"/>
+                                        <field name="rjasasad1" string="Batas 1"/>
+                                        <field name="rjasasad2" string="Batas 2"/>
+                                        <field name="rjasasad3" string="Batas 3"/>
+                                        <field name="rjasasad4" string="Batas 4"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxasasad1" string="X 1"/>
+                                        <field name="pxasasad2" string="X 2"/>
+                                        <field name="pxasasad3" string="X 3"/>
+                                        <field name="pxasasad4" string="X 4"/>
+                                      </group>
+                                    </group>
+                                    <group string="Kasir (FD)">
+                                      <group>
+                                        <field name="pjasafde" string="Pembagi"/>
+                                        <field name="rjasafde1" string="Batas 1"/>
+                                        <field name="rjasafde2" string="Batas 2"/>
+                                        <field name="rjasafde3" string="Batas 3"/>
+                                        <field name="rjasafde4" string="Batas 4"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxasasad1" string="X 1"/>
+                                        <field name="pxasasad2" string="X 2"/>
+                                        <field name="pxasasad3" string="X 3"/>
+                                        <field name="pxasasad4" string="X 4"/>
+                                      </group>
+                                    </group>
+                                    <group string="Kepala Bengkel">
+                                      <group>
+                                        <field name="rjasakbe1" string="Batas 1"/>
+                                        <field name="rjasakbe2" string="Batas 2"/>
+                                        <field name="rjasakbe3" string="Batas 3"/>
+                                        <field name="rjasakbe4" string="Batas 4"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxjasakbe1" string="X 1"/>
+                                        <field name="pxjasakbe2" string="X 2"/>
+                                        <field name="pxjasakbe3" string="X 3"/>
+                                        <field name="pxjasakbe4" string="X 4"/>
+                                      </group>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Insentif Sparepart">
+                              <pre>
+                                <span>Rumus perhitungan insentif sebagai berikut :
+                                Jika totalsparepart kurang dari Batas 1 
+                                maka totaljasa * X 1
+                                atau Batas 1 kurang dari totaljasa kurang dari Batas 2
+                                maka totaljasa * X 2
+                                atau totaljasa lebih dari Batas 2
+                                maka totaljasa * X 3</span>
+                              </pre>
+                                <group col="2">
+                                    <group string="Mekanik">
+                                      <group>
+                                        <field name="rspamek1" string="Batas 1"/>
+                                        <field name="rspamek2" string="Batas 2"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxspamek1" string="X 1"/>
+                                        <field name="pxspamek2" string="X 2"/>
+                                        <field name="pxspamek3" string="X 3"/>
+                                      </group>
+                                    </group>
+                                    <group string="Service Advisor (FI)">
+                                      <group>
+                                        <field name="rspafisa1" string="Batas 1"/>
+                                        <field name="rspafisa2" string="Batas 2"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxspafisa1" string="X 1"/>
+                                        <field name="pxspafisa2" string="X 2"/>
+                                        <field name="pxspafisa3" string="X 3"/>
+                                      </group>
+                                    </group>
+                                    <group string="Front Desk">
+                                      <group>
+                                        <field name="rspafd1" string="Batas 1"/>
+                                        <field name="rspafd2" string="Batas 2"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxspafd1" string="X 1"/>
+                                        <field name="pxspafd2" string="X 2"/>
+                                        <field name="pxspafd3" string="X 3"/>
+                                      </group>
+                                    </group>
+                                    <group string="Partman">
+                                      <group>
+                                        <field name="rspaptm1" string="Batas 1"/>
+                                        <field name="rspaptm2" string="Batas 2"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxspaptm1" string="X 1"/>
+                                        <field name="pxspaptm2" string="X 2"/>
+                                        <field name="pxspaptm3" string="X 3"/>
+                                      </group>
+                                    </group>
+                                    <group string="Kasir">
+                                      <group>
+                                        <field name="rspaksr1" string="Batas 1"/>
+                                        <field name="rspaksr2" string="Batas 2"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxspaksr1" string="X 1"/>
+                                        <field name="pxspaksr2" string="X 2"/>
+                                        <field name="pxspaksr3" string="X 3"/>
+                                      </group>
+                                    </group>
+                                    <group string="Kepala Bengkel">
+                                      <group>
+                                        <field name="rspakbe1" string="Batas 1"/>
+                                        <field name="rspakbe2" string="Batas 2"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxspakbe1" string="X 1"/>
+                                        <field name="pxspakbe2" string="X 2"/>
+                                        <field name="pxspakbe3" string="X 3"/>
+                                      </group>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Insentif Unit Entri">
+                                <pre>
+                                <span>Rumus perhitungan insentif sebagai berikut :
+                                Jika Batas 1 kurang dari totalue kurang dari Batas 2
+                                maka insentif = X 2
+                                atau Batas 3 kurang dari totalue kurang dari Batas 4
+                                maka insentif = X 2
+                                atau totaljasa lebih dari Batas 4
+                                maka insentif = X 3</span>
+                              </pre>
+                                <group col="2">
+                                    <group string="Mekanik">
+                                      <group>
+                                        <field name="ruemek1" string="Batas 1"/>
+                                        <field name="ruemek2" string="Batas 2"/>
+                                        <field name="ruemek3" string="Batas 3"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxuemek1" string="X 1"/>
+                                        <field name="pxuemek2" string="X 2"/>
+                                        <field name="pxuemek3" string="X 3"/>
+                                      </group>
+                                    </group>
+                                    <group string="FLP">
+                                      <group>
+                                        <field name="rueflp1" string="Batas 1"/>
+                                        <field name="rueflp2" string="Batas 2"/>
+                                        <field name="rueflp3" string="Batas 3"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxueflp1" string="X 1"/>
+                                        <field name="pxueflp2" string="X 2"/>
+                                        <field name="pxueflp3" string="X 3"/>
+                                      </group>
+                                    </group>
+                                    <group string="Kepala Bengkel">
+                                      <group>
+                                        <field name="ruekbe1" string="Batas 1"/>
+                                        <field name="ruekbe2" string="Batas 2"/>
+                                        <field name="ruekbe3" string="Batas 3"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxuekbe1" string="X 1"/>
+                                        <field name="pxuekbe2" string="X 2"/>
+                                        <field name="pxuekbe3" string="X 3"/>
+                                      </group>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Insentif Carbon Remover">
+                                <pre>
+                                <span>Rumus perhitungan insentif sebagai berikut :
+                                Jika totalue kurang dari Batas 1
+                                maka insentif = X 1
+                                atau Batas 1 kurang dari totalue kurang dari Batas 2
+                                maka insentif = X 2
+                                atau totaljasa lebih dari Batas 2
+                                maka insentif = X 3</span>
+                              </pre>
+                                <group col="2">
+                                    <group string="Mekanik">
+                                      <group>
+                                        <field name="rcrmek1" string="Batas 1"/>
+                                        <field name="rcrmek2" string="Batas 2"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxcrmek1" string="X 1"/>
+                                        <field name="pxcrmek2" string="X 2"/>
+                                        <field name="pxcrmek3" string="X 3"/>
+                                      </group>
+                                    </group>
+                                    <group string="Service Advisor">
+                                      <group>
+                                        <field name="rcrsa1" string="Batas 1"/>
+                                        <field name="rcrsa2" string="Batas 2"/>
+                                      </group>
+                                      <group>
+                                        <field name="pxcrsa1" string="X 1"/>
+                                        <field name="pxcrsa2" string="X 2"/>
+                                        <field name="pxcrsa3" string="X 3"/>
+                                      </group>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="smt_gajian.action_window_pargaji">
+            <field name="name">Parameter Insentif</field>
+            <field name="res_model">smt_gajian.pargaji</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Parameter" id="smt_gajian.parameterinsentif" parent="smt_gajian.menu_1"
+              action="smt_gajian.action_window_pargaji"/>
+    </data>
+</flectra>

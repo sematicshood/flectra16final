@@ -1,0 +1,24 @@
+<flectra>
+  <data>
+    <act_window id="smt_gajian.insentif_wizard_action" name="Insentif Harian" res_model="smt_gajian.wizardinsentif"
+                src_model="smt_gajian.insentifharian" view_mode="form" target="new"/>
+
+    <record id="insentifharian_wizard_view" model="ir.ui.view">
+        <field name="name">Insentif Harian</field>
+        <field name="model">smt_gajian.wizardinsentif</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="tanggal" string="Tanggal awal"/>
+                    <field name="tanggal2" string="Tanggal akhir"/>
+                </group>
+                <footer>
+                    <button name="hitunginsentif" string="Proses Insentif" class="oe_right oe_highlight"
+                            type="object"/>
+                    <button string="Cancel" class="oe_right" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+  </data>
+</flectra>

@@ -1,0 +1,49 @@
+<flectra>
+	<data>
+		<!-- explicit list view definition -->
+		<record model="ir.ui.view" id="smt_gajian.list_detilgaji">
+			<field name="name">Detil Gaji Karyawan</field>
+			<field name="model">smt_gajian.detilgaji</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="tanggal1"/>
+					<field name="nama"/>
+					<field name="nik"/>
+					<field name="jabatan"/>
+					<field name="gapok" string="Gaji Pokok"/>
+					<field name="kehadiran" string="Hari Kerja"/>
+					<field name="totue" string="Total UE"/>
+					<field name="ins_jasa" string="Insentif Jasa"/>
+					<field name="ins_part" string="Insentif Sparepart"/>
+					<field name="ins_cr" string="Insentif CR"/>
+					<field name="ins_other1" string="Insentif 1"/>
+					<field name="ins_other2" string="Insentif 2"/>
+					<field name="ins_other3" string="Insentif 3"/>
+					<field name="total_terima" string="Total Terima"/>
+				</tree>
+			</field>
+		</record>
+		<!-- actions opening views with pivot mode -->
+		<record model="ir.ui.view" id="smt_gajian.pivot_detilgaji">
+			<field name="name">Rekap Gaji</field>
+			<field name="model">smt_gajian.detilgaji</field>
+			<field name="arch" type="xml">
+				<pivot string ="Rekap Gaji">
+					<field name ="tanggal1" type="col"/>
+					<field name="nama" type="row"/>
+					<field name="dept" type="measure"/>
+					<field name="jabatan" type="measure"/>
+				</pivot>
+			</field>
+		</record>
+		<!-- actions opening views on models -->
+
+		<record model="ir.actions.act_window" id="smt_gajian.action_window_detilgaji">
+			<field name="name">Rekap gaji</field>
+			<field name="res_model">smt_gajian.detilgaji</field>
+			<field name="view_mode">tree,form,pivot</field>
+		</record>
+		<menuitem name="Rekap gajian" id="smt_gajian" parent="smt_gajian.menu_2"
+              action="smt_gajian.action_window_detilgaji"/>
+	</data>
+</flectra>

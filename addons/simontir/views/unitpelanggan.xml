@@ -1,0 +1,49 @@
+<flectra>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="simontir.list_unitpelanggan">
+            <field name="name">Daftar Motor Pelanggan</field>
+            <field name="model">simontir.unitpelanggan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Nopol"/>
+                    <field name="nomesin" />
+                    <field name="norangka"/>
+                    <field name="tahunbuat"/>
+                    <field name="jenisKendaraan"/>
+                    <field name="pelanggan"/>
+                </tree>
+            </field>
+        </record>
+        <!-- explicit Form definition -->
+        <record model="ir.ui.view" id="simontir.form_unitpelanggan">
+            <field name="name">Data Motor Pelanggan</field>
+            <field name="model">simontir.unitpelanggan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Nopol"/>
+                            <field name="nomesin" />
+                            <field name="norangka"/>
+                            <field name="tahunbuat"/>
+                            <field name="jenisKendaraan"/>
+                            <field name="pelanggan"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="simontir.action_window_unitpelanggan">
+            <field name="name">Motor Pelanggan</field>
+            <field name="res_model">simontir.unitpelanggan</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Motor Pelanggan" id="unitpelanggan" parent="simontir.menu_1" action="simontir.action_window_unitpelanggan"/>
+    </data>
+</flectra>

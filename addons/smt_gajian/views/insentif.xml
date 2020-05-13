@@ -1,0 +1,61 @@
+<flectra>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="smt_gajian.list_insentifharian">
+            <field name="name">Insentif Harian</field>
+            <field name="model">smt_gajian.insentifharian</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="tanggal"/>
+                    <field name="nama"/>
+                    <field name="nik"/>
+                    <field name="dept"/>
+                    <field name="activiti"/>
+                    <field name="jasa"/>
+                    <field name="sparepart"/>
+                    <field name="cr"/>
+                    <field name="unit_entri"/>
+                    <field name="ins_jasa"/>
+                    <field name="ins_part"/>
+                    <field name="ins_cr"/>
+                </tree>
+            </field>
+        </record>
+        <!-- actions opening views with pivot mode -->
+        <record model="ir.ui.view" id="smt_gajian.pivot_insentifharian">
+            <field name="name">Insentif Harian</field>
+            <field name="model">smt_gajian.insentifharian</field>
+            <field name="arch" type="xml">
+                <pivot string ="Insentif Harian">
+                    <field name ="tanggal" type="col"/>
+                    <field name="nama" type="row"/>
+                    <field name="ins_jasa" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+        <!-- actions opening views with grafik mode -->
+        <record model="ir.ui.view" id="smt_gajian.graph_insentifharian">
+            <field name="name">Insentif Harian</field>
+            <field name="model">smt_gajian.insentifharian</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <graph string ="Insentif Karyawan">
+                    <field name="tanggal" group="true"/>
+                    <field name="nama" group="true"/>
+                    <field name="jasa" operator="+"/>
+                </graph>
+            </field>
+        </record>
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="smt_gajian.action_window_insentifharian">
+            <field name="name">Insentif Harian</field>
+            <field name="res_model">smt_gajian.insentifharian</field>
+            <field name="view_mode">tree,form,pivot,graph</field>
+        </record>
+        <!-- menu categories -->
+        <menuitem name="Insentif list" id="smt_gajian.menu_1_list" parent="smt_gajian.menu_1"
+              action="smt_gajian.action_window_insentifharian"/>
+    </data>
+</flectra>

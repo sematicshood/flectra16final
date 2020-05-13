@@ -1,0 +1,42 @@
+<flectra>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="simontir.list_produktifitas">
+            <field name="name">Produktifitas </field>
+            <field name="model">simontir.rekapproduktifitasharian</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="tanggal"/>
+                    <field name="nama"/>
+                    <field name="jasa"/>
+                    <field name="sparepart"/>
+                    <field name="oli"/>
+                    <field name="busi"/>
+                    <field name="carbon_remover"/>
+                    <field name="unit_entri"/>
+                </tree>
+            </field>
+        </record>
+        <!-- actions opening views with pivot mode -->
+        <record model="ir.ui.view" id="simontir.pivot_produktifitas">
+            <field name="name">Produktifitas </field>
+            <field name="model">simontir.rekapproduktifitasharian</field>
+            <field name="arch" type="xml">
+                <pivot string ="Produktifitas">
+                    <field name ="tanggal" type="col"/>
+                    <field name="nama" type="row"/>
+                    <field name="jasa" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="simontir.action_window_produktifitas">
+            <field name="name">Produktifitas</field>
+            <field name="res_model">simontir.rekapproduktifitasharian</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+        <menuitem name="Laporan Produktifitas" id="produktifitas" parent="simontir.menu_2" action="simontir.action_window_produktifitas"/>
+    </data>
+</flectra>

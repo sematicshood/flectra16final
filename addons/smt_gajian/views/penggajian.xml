@@ -1,0 +1,45 @@
+<flectra>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="smt_gajian.list_rekapgaji">
+            <field name="name">Rekapan Gaji </field>
+            <field name="model">smt_gajian.rekapgaji</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="tanggal1"/>
+                    <field name="tanggal2"/>
+                </tree>
+            </field>
+        </record>
+        <!-- explicit Form definition -->
+        <record model="ir.ui.view" id="smt_gajian.form_rekapgaji">
+            <field name="name">Form Rekap Pengpyr</field>
+            <field name="model">smt_gajian.rekapgaji</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="tanggal1" string="Tanggal Laporan"/>
+                            <field name="tanggal2"/>
+                        </group>
+                        <button string="Rekap" icon="fa-print" type="object" name="prosespyr"/>
+                        <notebook position="inside">
+                            <page string="Preview">
+                                <pre>
+                                    <field name="totalgaji"/>
+                                </pre>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="smt_gajian.action_window_rekapgaji">
+            <field name="name">Daftar Slip Gaji</field>
+            <field name="res_model">smt_gajian.rekapgaji</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Proses" id="smt_gajian.prosesgajian" parent="smt_gajian.menu_2"
+              action="smt_gajian.action_window_rekapgaji"/>
+    </data>
+</flectra>
