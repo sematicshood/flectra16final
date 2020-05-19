@@ -1,0 +1,14 @@
+<flectra>
+    <data noupdate="0">
+        <record id="template_dotmatrix_invoice_jormix" model="mail.template">
+            <field name="name">Dot Matrix Invoice Jormix</field>
+            <field name="model_id" ref="account.model_account_invoice"></field>
+            <field name="subject">Dot Matrix Template for Jormix Invoice</field>
+            <field name="body_html">
+            <![CDATA[
+${"\n"}${"\n"}${object.name_perusahaan}${"\n"}${object.alamat_perusahaan}${"\n"}${object.telpon_perusahaan}${"\n"}${"\n"}${" ".ljust(40)}${"\n"}${"_"*120}${"\n"}${'BUKTI PENGIRIMAN:'.ljust(40)}${"\n"}${"_"*120}${"\n"}${"No. Bukti Pengiriman:".rjust(12)}${object.no_bukti_pengiriman.ljust(40) if object.no_bukti_pengiriman else " ".ljust(15)}${"\n"}${"Dipasok Oleh:".rjust(12)}${object.name_perusahaan.ljust(30) if object.name_perusahaan else " ".ljust(40)}${"Tanggal Pengiriman:".rjust(12)}${object.tanggal_pengiriman.ljust(15) if object.tanggal_pengiriman else " ".ljust(40)}${"\n"}${"Nama Pembeli:".rjust(12)}$${object.nama_konsumen.ljust(30) if object.nama_konsumen else " ".ljust(30)}${'Proyek:'.rjust(12)}${"\n"} ${object.nama_proyek.ljust(30) if object.nama_proyek else " ".ljust(40)}${"\n"}${"_"*120}${"\n"}${'Mutu:'.rjust(12)} ${'Kode Produk:'.rjust(22)} ${'Slump:'.rjust(22)}${'Volume(m2):'.rjust(22)}${'Total(m2):'.rjust(17)}${'No Truk:'.rjust(17)}${"\n"}${object.mutu_produk.rjust(17) if object.mutu_produk else " ".rjust(17)}${object.kode_produk.rjust(17) if object.kode_produk else " ".rjust(17)}${object.slump.rjust(23) if object.slump else " ".rjust(23)}${object.volume.rjust(17) if object.volume else " ".rjust(17)}${object.total_volume.rjust(17) if object.total_volume else " ".rjust(17)}${object.no_truk.rjust(17) if object.no_truk else " ".rjust(17)}${"\n"}${"_"*120}${"\n"}
+                ]]>
+            </field>
+        </record>
+    </data>
+</flectra>

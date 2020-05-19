@@ -15,4 +15,21 @@
         report_type="qweb-pdf"
         name="smt_beton.report_proyek"
         file="smt_beton.report_proyek"/>
+
+     <report
+        id="report_data_invoice"
+        string="Laporan Invoice"
+        model="sale.order"
+        report_type="qweb-pdf"
+        name="smt_beton.report_invoice"
+        file="smt_beton.report_invoice"/>
+
+     <report
+        id="report_data_invoice_terakhir"
+        string="Laporan Invoice Terkini"
+        model="account.invoice"
+        report_type="qweb-pdf"
+        name="smt_beton.report_invoice_now"
+        file="smt_beton.report_invoice_now"/>
+
 </flectra>

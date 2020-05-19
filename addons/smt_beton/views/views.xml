@@ -37,7 +37,7 @@
     </record> -->
     <!-- explicit list view data konsumen -->
 
-    <record model="ir.ui.view" id="smt_beton.proyek">
+    <!-- <record model="ir.ui.view" id="smt_beton.proyek">
       <field name="name">Data Proyek</field>
       <field name="model">sale.order</field>
       <field name="arch" type="xml">
@@ -54,7 +54,7 @@
             <field name="state"/>
         </tree>
       </field>
-    </record>
+    </record> -->
     
     <!-- explicit dashboard marketing view  -->
     <!-- <record id="view_dashboard_marketing_kanban" model="ir.ui.view">
@@ -86,6 +86,13 @@
     </record> -->
     <!-- actions opening views on models -->
 
+    <!-- actions opening views on daftar konsumen -->
+    <!-- <record model="ir.actions.act_window" id="smt_beton.data_konsumen">
+      <field name="name">Data Konsumen</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">tree,form</field>
+    </record> -->
+
 
     <!-- view sprint pada Dashboard marketing  -->
     <record id="smt_beton.action_marketing_dashboard" model="ir.actions.act_window">
@@ -96,13 +103,7 @@
       <field name="inherit_id" ref="project_scrum.view_project_sprint_kanban"/>
     </record>
 
-    <!-- actions opening views on daftar konsumen -->
-    <!-- <record model="ir.actions.act_window" id="smt_beton.data_konsumen">
-      <field name="name">Data Konsumen</field>
-      <field name="res_model">res.partner</field>
-      <field name="view_mode">tree,form</field>
-    </record> -->
-
+    <!-- view data konsumen -->
     <record id="smt_beton.data_konsumen" model="ir.actions.act_window">
         	<field name="name">res.partner.inherit</field>
         	<field name="res_model">res.partner</field>
@@ -112,37 +113,79 @@
 					    <field name="x_kode_konsumen" string="Kode Konsumen"/>
 				    </xpath>
         	</field>
-  </record>
+    </record>
 
   <record id="smt_beton.data_konsumen_tree" model="ir.ui.view">
       <field name="name">res.partner.tree.inherit</field>
       <field name="res_model">res.partner</field>
       <field name="inherit_id" ref="base.view_partner_tree" />
       <field name="arch" type="xml">
-				  <xpath expr="//field[@name='email']" position="after">
+				  <xpath expr="//field[@name='display_name']" position="before">
 					  <field name="x_kode_konsumen" />
+				  </xpath>
+				    <xpath expr="//field[@name='display_name']" position="after">
+					    <field name="street" string="Alamat"/>
+				    </xpath>
+      </field>
+  </record>
+
+    <!-- view and form data proyek -->
+		<record id="smt_beton.data_proyek" model="ir.actions.act_window">
+			<field name="name">Data Proyek</field>
+			<field name="res_model">sale.order</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+    <record id="smt_beton.form_data_proyek" model="ir.ui.view">
+       <field name="name">sale.order.form.data.proyek</field>
+       <field name="model">sale.order</field>
+       <field name="inherit_id" ref="sale.view_order_form"/>
+       <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="x_nama_proyek"/>
+            </xpath>
+            <xpath expr="//field[@name='x_nama_proyek']" position="after">
+                <field name="jaraklokasicor"/>
+            </xpath>
+            <xpath expr="//field[@name='jaraklokasicor']" position="after">
+                <field name="x_metode_pembayaran"/>
+            </xpath>
+            <xpath expr="//field[@name='x_metode_pembayaran']" position="after">
+                <field name="x_is_pajak"/>
+            </xpath>
+            <xpath expr="//field[@name='x_is_pajak']" position="after">
+                <field name="x_with_pompa"/>
+            </xpath>
+       </field>
+    </record>
+    
+
+  <record id="smt_beton.data_proyek_tree" model="ir.ui.view">
+      <field name="name">sale.order.tree.inherit</field>
+      <field name="res_model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_quotation_tree" />
+      <field name="arch" type="xml">
+				  <!-- <xpath expr="//field[@name='partner_id']" position="after">
+					  <field name="x_kode_konsumen_so" />
+				  </xpath> -->
+				  <xpath expr="//field[@name='date_order']" position="before">
+					  <field name="x_nama_proyek" />
+				  </xpath>
+				  <xpath expr="//field[@name='date_order']" position="after">
+					  <field name="x_tanggal_cor" />
+				  </xpath>
+				  <xpath expr="//field[@name='amount_total']" position="before">
+					  <field name="x_mutu_bahan" />
+				  </xpath>
+				  <xpath expr="//field[@name='x_mutu_bahan']" position="before">
+					  <field name="x_jumlah_produk" />
 				  </xpath>
       </field>
   </record>
 
-
-    <!-- actions opening views on daftar konsumen -->
-    <record model="ir.actions.act_window" id="smt_beton.data_proyek">
-      <field name="name">Data Proyek</field>
-      <field name="res_model">sale.order</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-
-    <!-- actions opening views on jadwal produksi -->
-    <!-- <record model="ir.actions.act_window" id="smt_beton.jadwal_produksi">
-      <field name="name">smt_beton window</field>
-      <field name="res_model">smt_beton.smt_beton</field>
-      <field name="view_mode">tree,form</field>
-    </record> -->
-
     <record model="ir.actions.act_window" id="smt_beton.jadwal_produksi">
       <field name="name">Jadwal Produksi</field>
-      <field name="res_model">res.partner</field>
+      <field name="res_model">account.invoice</field>
       <field name="view_mode">tree,form</field>
     </record>
 
@@ -209,22 +252,22 @@
     </record>
 
     <!-- view sprint pada scrum  -->
-    <record id="smt_beton.smt_sprint_scrum" model="ir.actions.act_window">
+    <!-- <record id="smt_beton.smt_sprint_scrum" model="ir.actions.act_window">
       <field name="name">smt.beton.smt.sprint.scrum</field>
       <field name="res_model">project.sprint</field>
       <field name="view_type">form</field>
       <field name="view_mode">kanban,form,tree,calendar</field>
       <field name="inherit_id" ref="project_scrum.view_project_sprint_kanban"/>
-    </record>
+    </record> -->
 
     <!-- view sprint pada scrum  -->
-    <record id="smt_beton.smt_update_sprint" model="ir.actions.act_window">
+    <!-- <record id="smt_beton.smt_update_sprint" model="ir.actions.act_window">
         <field name="name">smt.update.scrum.tree</field>
         <field name="res_model">smt.update.scrum</field>
         <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
-    </record>
+    </record> -->
 
     <!-- view sprint pada wizards scrum  -->
     <record id="view_vit_generate_efaktur_form2" model="ir.ui.view">
@@ -244,6 +287,29 @@
         </field>
     </record>
 
+    <record id="view_print_invoice" model="ir.ui.view">
+        <field name="name">view_print_invoice</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button type="action" string="Dot Matrix Jormix" icon="fa-print" custom="print_dotmetrix"/>
+            </header>
+
+            <notebook position="inside">
+                <page string="Dot Matrix Jormix">
+                    <button string="Refresh Printer Data" icon="fa-print" type="object" name="generate_printer_data_jormix"/>
+                    <pre>
+                        <field name="printer_data_jormix"/>
+                    </pre>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+
+
+
     <!-- Top menu item -->
     <menuitem name="Jormix" id="smt_beton.menu_root"/>
     <!-- menu categories -->
@@ -254,7 +320,7 @@
     <menuitem name="Master Data" id="smt_beton.menu_5" parent="smt_beton.menu_root"/>
     <menuitem name="Invoicing" id="smt_beton.menu_6" parent="smt_beton.menu_root"/>
     <menuitem name="Laporan" id="smt_beton.menu_7" parent="smt_beton.menu_root"/>
-    <menuitem name="Scrum" id="smt_beton.menu_8" parent="smt_beton.menu_root"/>
+    <!-- <menuitem name="Scrum" id="smt_beton.menu_8" parent="smt_beton.menu_root"/> -->
 
     <!-- actions -->
     <menuitem name="Marketing" id="smt_beton.menu_1_list" parent="smt_beton.menu_1"
@@ -271,13 +337,14 @@
               action="smt_beton.smt_produk_id"/>
     <menuitem name="Costumer Invoice" id="smt_beton.menu_7_list" parent="smt_beton.menu_6"
               action="smt_beton.smt_invoice_id"/>
-    <menuitem name="Penjualan" id="smt_beton.menu_8_list" parent="smt_beton.menu_7"
-              action="smt_beton.smt_laporan_penjualan"/>
     <menuitem name="Channel Penjualan" id="smt_beton.menu_9_list" parent="smt_beton.menu_7"
               action="smt_beton.smt_laporan_channel_penjualan"/>
-    <menuitem name="Sprint" id="smt_beton.menu_10_list" parent="smt_beton.menu_8"
+    <menuitem name="Penjualan" id="smt_beton.menu_8_list" parent="smt_beton.menu_7"
+              action="smt_beton.smt_laporan_penjualan"/>
+
+    <!-- <menuitem name="Sprint" id="smt_beton.menu_10_list" parent="smt_beton.menu_8"
               action="smt_beton.smt_sprint_scrum"/>
     <menuitem name="Update Sprint" id="smt_beton.menu_11_list" parent="smt_beton.menu_8"
-              action="smt_beton.smt_update_sprint"/>
+              action="smt_beton.smt_update_sprint"/> -->
   </data>
 </flectra>

@@ -3,6 +3,7 @@
 from flectra import models, fields, api
 from flectra import exceptions
 import uuid
+from datetime import datetime
 
 class SmtBeton(models.Model):
     _name = 'smt_beton.smt_beton'
@@ -31,7 +32,22 @@ class AddFieldResPartner(models.Model):
 class AddFieldSaleorder(models.Model):
     _inherit = 'sale.order'
 
-    jaraklokasicor = fields.Float()
+    @api.multi
+    def len_jumlah_produk(self):
+        for rec in self:
+            if rec.order_line:
+                rec.x_jumlah_produk = len(rec.order_line)
+
+    jaraklokasicor = fields.Float(string='Jarak Ke Lokasi' ,default='')
+    x_kode_konsumen_so = fields.Char(related='partner_id.x_kode_konsumen', string='Kode Konsumen', default='')
+    x_nama_proyek = fields.Char(string='Nama Proyek', required=True, default='')
+    x_tanggal_cor = fields.Date('Tanggal Pengecoran', required=True, default=lambda self: fields.datetime.now())
+    x_mutu_bahan = fields.Char(string='Mutu Bahan', required=True, default='')
+    x_jumlah_produk = fields.Char(string='Jumlah Dipesan', default='')
+    x_metode_pembayaran = fields.Char(string='Metode Pembayaran' ,default='')
+    x_is_pajak = fields.Boolean('Pajak/Tidak', default=False)
+    x_with_pompa = fields.Char(string='Pakai Pompa Long/Short' ,default='')
+
 
 class ValidateSeven(models.Model):
     _inherit = 'stock.picking'
@@ -146,4 +162,65 @@ class UpdateScrum(models.Model):
                         "user_id":user_id.id,
                         "company_d":company_id.id}
                     self.env['project.project'].create(data)
+
+
+
+class invoice(models.Model):
+    _name = 'account.invoice'
+    _inherit = 'account.invoice'
+
+    printer_data_jormix = fields.Text(string="Printer Data", required=False, )
+    no_bukti_pengiriman = fields.Char("No. Bukti Pengiriman", default=str(uuid.uuid4().fields[-1])[:5])
+    name_perusahaan = fields.Text(string="Dipasok Oleh", default='JORMIX')
+    alamat_perusahaan = fields.Text(string="alamat_perusahaan", default='')
+    telpon_perusahaan = fields.Text(string="telpon_perusahaan", default='')
+    nama_konsumen = fields.Text(string="Nama Pembeli", required=False, defaulf='')
+    nama_proyek = fields.Text(string="Proyek", required=False, defaulf='')
+    mutu_produk = fields.Text(string="Mutu", required=False, defaulf='')
+    kode_produk = fields.Text(string="Kode Produk", required=False, defaulf='')
+    slump = fields.Text(string="Slump", required=False,defaulf='' )
+    volume = fields.Text(string="Volume", required=False, defaulf='' )
+    total_volume = fields.Text(string="Total", required=False, defaulf='')
+    no_truk = fields.Text(string="No Truk", required=False, defaulf='')
+    tanggal_pengiriman = fields.Datetime.now()
+
+    @api.multi
+    def generate_printer_data_jormix(self):
+        print("cekk", self.origin)
+        so = self.env['sale.order'].sudo().search([
+            ('name', '=', self.origin)])
+
+        self.alamat_perusahaan = "Monjali St No.30A, Nandan, Sariharjo, Ngaglik, Sleman Regency, Special Region of Yogyakarta 55581"
+        self.telpon_perusahaan = "(0274) 625014"
+        self.nama_konsumen = self.partner_id.name
+        self.nama_proyek = so.x_nama_proyek
+        self.mutu_produk = so.x_mutu_bahan
+        self.kode_produk = 'Code-123'
+        self.slump = 'Slump123'
+        self.volume = '123'
+        self.total_volume = '123'
+        self.no_truk = 'ABC123'
+        tpl = self.env['mail.template'].search(
+            [('name', '=', 'Dot Matrix Invoice Jormix')])
+        data = tpl.render_template(
+            tpl.body_html, 'account.invoice', self.id, post_process=False)
+        self.printer_data_jormix = data
+
+
+    @api.multi
+    def action_invoice_open(self):
+        res = super(invoice, self).action_invoice_open()
+        self.generate_printer_data_jormix()
+        return res
+
+
+    @api.multi
+    def action_invoice_cancel(self):
+        self.printer_data_jormix = ''
+        return super(invoice, self).action_cancel()
+
+
+
+
+
 
