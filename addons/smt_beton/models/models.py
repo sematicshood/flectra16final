@@ -218,9 +218,3 @@ class invoice(models.Model):
     def action_invoice_cancel(self):
         self.printer_data_jormix = ''
         return super(invoice, self).action_cancel()
-
-
-
-
-
-

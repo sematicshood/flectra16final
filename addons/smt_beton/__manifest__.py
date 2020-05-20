@@ -33,7 +33,7 @@
         'reports/proyek_card.xml',
         'reports/invoice_card.xml',
         'reports/invoice_card_update.xml'
-        # 'views/respartner.xml'
+        'views/respartner.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
