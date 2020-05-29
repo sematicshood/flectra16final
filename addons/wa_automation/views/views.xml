@@ -1,0 +1,78 @@
+<flectra>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="wa_automation.list">
+      <field name="name">wa_automation list</field>
+      <field name="model">wa_automation.wa_automation</field>
+      <field name="arch" type="xml">
+        <tree>
+          <!-- <field name="code_order"/> -->
+          <field name="nama_konsumen"/>
+          <field name="no_wa"/>
+          <field name="tanggal_order"/>
+          <field name="order_detail"/>
+          <field name="welcome"/>
+          <field name="fu_1"/>
+          <field name="fu_2"/>
+          <field name="fu_3"/>
+          <field name="promo"/>
+        </tree>
+      </field>
+    </record>
+   
+
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="wa_automation.wa_automation_action_window">
+      <field name="name">wa_automation window</field>
+      <field name="res_model">wa_automation.wa_automation</field>
+      <field name="view_mode">tree,form</field>
+        	<field name="arch" type="xml">
+				    <xpath expr="//field[@name='fu_3']" position="after">
+					    <field name="welcome" string="Selamat datang"/>
+				    </xpath>
+				    <xpath expr="//field[@name='fu_1']" position="before">
+					    <field name="order_detail" string="Keterangan Order"/>
+				    </xpath>
+        	</field>
+    </record>
+   
+
+    <!-- server action to the one above -->
+    
+    <record model="ir.actions.server" id="wa_automation.funnel_follow_up_action_window">
+      <field name="name">wa_automation server</field>
+      <field name="res_model">wa_automation.wa_automation</field>
+      <field name="model_id" ref="model_wa_automation_wa_automation"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+   
+
+    <!-- Top menu item -->
+    
+    <menuitem name="wa_automation" id="wa_automation.menu_root"/>
+   
+    <!-- menu categories -->
+    
+    <menuitem name="WA_AUTOMATION" id="wa_automation.menu_1" parent="wa_automation.menu_root"/>
+    <menuitem name="FUNNEL_FOLLOW_UP" id="wa_automation.menu_2" parent="wa_automation.menu_root"/>
+    <menuitem name="WA_TRANSACTION" id="wa_automation.menu_3" parent="wa_automation.menu_root"/>   
+    
+    <!-- actions -->
+    <menuitem name="wa_automation" id="wa_automation.menu_1_list" parent="wa_automation.menu_1"
+              action="wa_automation.wa_automation_action_window"/>
+    <menuitem name="Kirim Whatsapp" id="wa_automation.menu_2_list" parent="wa_automation.menu_1"
+              action="wa_automation_send_wa_automation_action_window"/>
+    <menuitem name="funnel_follow_up" id="wa_automation.menu_3_list" parent="wa_automation.menu_2"
+              action="wa_automation.funnel_follow_up_action_window"/>
+   
+  </data>
+</flectra>

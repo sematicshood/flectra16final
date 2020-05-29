@@ -1,0 +1,54 @@
+<flectra>
+    <data>
+
+        <record id="wa_automation_send_wa_automation_action_window" model="ir.actions.act_window">
+            <field name="name">Send Whatsapp</field>
+            <field name="res_model">wa_automation.wizards.sendwa</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="view_wa_automation_send_wa_automation_action_window_form" model="ir.ui.view">
+            <field name="name">wa_automation.wizards.sendwa.form</field>
+            <field name="model">wa_automation.wizards.sendwa</field>
+            <field name="type">form</field>
+            <field name="priority" eval="10"/>
+            <field name="arch" type="xml">
+                <form string="Send WA Form">
+                    <group colspan="2">
+                        <field name="send_type" style="width:200px;"/>
+                    </group>
+
+                    <group colspan="4">
+                        <field name="message_fu_1" placeholder="text.." style="width:400px;"/>
+                    </group>
+
+                    <group colspan="4">
+                        <field name="message_fu_2" placeholder="text.." style="width:400px;"/>
+                    </group>
+
+                    <group colspan="4">
+                        <field name="message_fu_3" placeholder="text.." style="width:400px;"/>
+                    </group>
+
+                    <group colspan="4">
+                        <field name="message_welcome" placeholder="text.." style="width:400px;"/>
+                    </group>
+
+                    <group colspan="4">
+                        <field name="message_promo" placeholder="text.." style="width:400px;"/>
+                    </group>
+
+                    <footer>
+                        <button string="Kirim" name="confirm_button" type="object" class="btn-primary"/>
+                        <button string="Batal" class="btn-default" special="cancel" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</flectra>
