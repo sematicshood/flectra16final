@@ -1,105 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
 <flectra>
-
     <template id="report_invoice_now">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                        <br></br>
                         <div class="oe_structure"/>
                         <div class="row">
-                            <div class="col-xs-2" style="margin:auto;">
+                            <center><h4>Faktur</h4></center>
+                            <div class="column" style="float:left;width:50%;height:100px;">
+                                <p>Nama         :<span t-field="o.partner_id.name"/></p>
+                                <p>Alamat       :<span t-field="o.partner_id.street"/></p>
+                                <p>Telpon       :<span t-field="o.partner_id.mobile"/></p>
                             </div>
+                            <div class="column" style="float:left;width:50%;height:100px;">
+                                <p>Tanggal Pembayaran: <span t-field="o.date_invoice"/></p>
+                                <p>Tanggal Jatuh Tempo: <span t-field="o.date_due"/></p>
+                            </div>
+                        </div>
+                        <div class="row">
                             <center>
-                                <div class="col-xs-8" style="margin:auto">
-                                    <table class="table table-condensed" style="border: 3px solid black !important;">
-                                        <tr>
-                                            <td width="40%">
-                                                <!-- <p style="text-align:center;padding-top:10px;">
-                                                    <img t-if="not o.image" t-att-src="'/web/static/src/img/placeholder.png'" height="120" border="1" width="120"/>
-                                                    <img t-if="o.image" t-att-src="'data:image/png;base64,%s' % to_text(o.image)" height="120" border="1" width="120"/>
-                                                </p> -->
-                                                <p style="text-align:center;">
-                                                    <h2><strong><span t-field="o.number"/></strong></h2>
-                                                </p>
-                                            </td>
-                                            <td width="60%">
-                                                <table>
-                                                    <tr>
-                                                        <td>
-                                                            <p style="text-align:right;"><strong>Nama: </strong></p>
-                                                            <!-- <p style="text-align:right;"><strong>Alamat: </strong></p>
-                                                            <p style="text-align:right;"><strong>Telpon: </strong></p> -->
-                                                            <p style="text-align:right;"><strong>Tanggal Pembayaran: </strong></p>
-                                                            <p style="text-align:right;"><strong>Tanggal Jatuh Tempo: </strong></p>
-                                                        </td>
-                                                        <td>
-                                                            <!-- <p style="text-align:left;padding-left:10px;"  t-field="o.street"/>
-                                                            <p style="text-align:left;padding-left:10px;" t-field="o.phone"/>
-                                                            <p style="text-align:left;padding-left:10px;" t-field="o.lang"/> -->
-                                                            <p style="text-align:left;padding-left:10px;" t-field="o.partner_id.name"/>
-                                                            <!-- <p style="text-align:left;padding-left:10px;" t-field="o.partner_id.street"/>
-                                                            <p style="text-align:left;padding-left:10px;" t-field="o.partner_id.mobile"/> -->
-                                                            <p style="text-align:left;padding-left:10px;" t-field="o.date_invoice"/>
-                                                            <p style="text-align:left;padding-left:10px;" t-field="o.date_due"/>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <table class="table table-condensed" style="border: 3px solid black !important;">
-                                        <t t-foreach="o.invoice_line_ids" t-as="line">
+                                    <br></br>
+                                    <table class="table table-condensed">
+                                        <thead>
                                             <tr>
-                                                <td>
-                                                    <p style="text-align:right;"><strong>Nama Item: </strong><t t-esc="line.product_id.name"/></p> 
-                                                </td>
-                                                <td>
-                                                    <p style="text-align:right;"><strong>Jumlah Item: </strong><t t-esc="line.quantity"/></p> 
-                                                </td>
-                                                <td>
-                                                    <p style="text-align:right;"><strong>Harga: </strong><t t-esc="line.price_unit"/></p> 
-                                                </td> 
+                                                <th>Nama Item:</th>
+                                                <th class="text-right">Jumlah Item:</th>
+                                                <th class="text-right">Harga:</th>
                                             </tr>
+                                    </thead>
 
-                                        </t>
+                                    <tbody class="anggaran_tbody">
+                                            <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                                <td>
+                                                <span t-field="l.product_id.name"/>
+                                                </td>
+                        
+                                                <td class="text-right">
+                                                    <span t-field="l.quantity" />
+                                                </td>
+
+                                                <td class="text-right">
+                                                    <span t-field="l.price_unit" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                     </table>
-                                    <table class="table table-condensed" style="border: 3px solid black !important;">
-                                                    <tr>
-                                                        <td>
-                                                            <p style="text-align:right;"><strong>Pembayaran: </strong></p>
-                                                            <p style="text-align:right;"><strong>Total: </strong></p>
-````                                                    </td>
-                                                        <td>
-                                                            <!-- <p style="text-align:left;padding-left:10px;"  t-field="o.street"/>
-                                                            <p style="text-align:left;padding-left:10px;" t-field="o.phone"/>
-                                                            <p style="text-align:left;padding-left:10px;" t-field="o.lang"/> -->
-                                                            <p style="text-align:left;padding-left:10px;" t-field="o.gross_amount"/>
-                                                            <p style="text-align:left;padding-left:10px;" t-field="o.amount_total"/>
-                                                        </td>
-                                                    </tr>
-                                    </table>
-                                </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-4 pull-right">
+                                            <table class="table table-condensed">
+                                                <tr class="border-black">
+                                                    <td><strong>Pembayaran: </strong></td>
+                                                    <td class="text-right">
+                                                        <span t-field="o.gross_amount" />
+                                                    </td>
+                                                </tr>
+                                                <br></br>
+                                                <tr>
+                                                    <td>Diskon:</td>
+                                                    <td class="text-right">
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <br></br>
+                                                <tr>
+                                                    <td>Pajak:</td>
+                                                    <td class="text-right">
+                                                        
+                                                    </td>
+                                                </tr>                                                
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-4 pull-right">
+                                            <table class="table table-condensed">
+                                                <tr class="border-black">
+                                                    <td><strong>Total: </strong></td>
+                                                    <td class="text-right">
+                                                        <span t-field="o.amount_total" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-4 pull-left">
+                                            <table class="table table-condensed">
+                                                <tr class="border-black">
+                                                    <td><strong>Pesan: </strong></td>
+                                                    <td class="text-left">
+                                                    </td>
+                                                </tr>
+                                                <br></br>
+                                                <tr>
+                                                    <td>Faktur Pajak Nomor</td>
+                                                    <td class="text-left">
+                                                        
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-4 pull-left">
+                                            <table class="table table-condensed">
+                                                <tr class="border-black">
+                                                    <td><strong>Detail Pembayaran: </strong></td>
+                                                    <td class="text-left">
+                                                    </td>
+                                                </tr>
+                                                <br></br>
+                                                <tr>
+                                                    <td>Nama Bank:</td>
+                                                    <td class="text-left">
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <br></br>
+                                                <tr>
+                                                    <td>Cabang Bank:</td>
+                                                    <td class="text-left">
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <br></br>
+                                                <tr>
+                                                    <td>No. Akun Bank:</td>
+                                                    <td class="text-left">
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <br></br>
+                                                <tr>
+                                                    <td>Atas Nama:</td>
+                                                    <td class="text-left">
+                                                        PT Jormix
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4 pull-right">
+                                            <table class="table table-condensed">
+                                                <p>Tanda Tangan</p>
+                                                <tr class="border-black">
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
                             </center>
-                            <!--adding the barcode to the report-->
-                            <!--  https://www.youtube.com/watch?v=bwT_ZtKWn9E&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=51  -->
-                            <!--<table class="table table-bordered mb-0" style="border: 2px solid black;">-->
-                                <!--<tr>-->
-                                    <!--<td class="text-center align-middle" style="height: 6rem">-->
-                                        <!--<img alt="Barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', o.name_seq, 600, 150)" style="width:100%;height::4rem;"/>-->
-                                        <!--<span t-field="o.name_seq"/>-->
-                                    <!--</td>-->
-                                <!--</tr>-->
-                            <!--</table>-->
                         </div>
                     </div>
                 </t>
             </t>
         </t>
     </template>
-
 </flectra>

@@ -4,6 +4,7 @@ from flectra import models, fields, api
 from flectra import exceptions
 import uuid
 from datetime import datetime
+from flectra.exceptions import UserError
 
 class SmtBeton(models.Model):
     _name = 'smt_beton.smt_beton'
@@ -22,6 +23,12 @@ class AddFieldResPartner(models.Model):
     _inherit = 'res.partner'
 
     x_kode_konsumen = fields.Char("Kode Konsumen", default=str(uuid.uuid4().fields[-1])[:5])
+    @api.constrains('name')
+    def _check_name(self):
+        partner_rec = self.env['res.partner'].search(
+            [('name', '=', self.name)])
+        if partner_rec and len(partner_rec) > 1:
+            raise UserError('Nama sudah ada. Gunakan nama lain atau tambahkan identifikasi pada nama!')
 
     # noktp = fields.Char("NO ktp")
     # nosiup = fields.Char()
@@ -40,7 +47,7 @@ class AddFieldSaleorder(models.Model):
 
     jaraklokasicor = fields.Float(string='Jarak Ke Lokasi' ,default='')
     x_kode_konsumen_so = fields.Char(related='partner_id.x_kode_konsumen', string='Kode Konsumen', default='')
-    x_nama_proyek = fields.Char(string='Nama Proyek', required=True, default='')
+    #x_nama_proyek = fields.Char(string='Nama Proyek', required=True, default='')
     x_tanggal_cor = fields.Date('Tanggal Pengecoran', required=True, default=lambda self: fields.datetime.now())
     x_mutu_bahan = fields.Char(string='Mutu Bahan', required=True, default='')
     x_jumlah_produk = fields.Char(string='Jumlah Dipesan', default='')
@@ -73,6 +80,8 @@ class AddPriority(models.Model):
     _inherit = 'product.template'
     pass
 
+class AddJournalDash(models.Model):
+    _inherit = 'account.journal'
 
 class AddChangePrice(models.Model):
     _inherit = 'account.invoice.line'
@@ -193,7 +202,7 @@ class invoice(models.Model):
         self.alamat_perusahaan = "Monjali St No.30A, Nandan, Sariharjo, Ngaglik, Sleman Regency, Special Region of Yogyakarta 55581"
         self.telpon_perusahaan = "(0274) 625014"
         self.nama_konsumen = self.partner_id.name
-        self.nama_proyek = so.x_nama_proyek
+        self.nama_proyek = so.analytic_account_id
         self.mutu_produk = so.x_mutu_bahan
         self.kode_produk = 'Code-123'
         self.slump = 'Slump123'
