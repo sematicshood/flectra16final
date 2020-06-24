@@ -45,7 +45,7 @@ class my_dashboard(models.Model):
 
         sales = self.env['sale.order'].search([('date_order', '<=', self.filter_date),
                                                 ('date_order', '>=', self.filter_date_end)],
-                                                limit=20)
+                                                limit=50)
 
         valid_sales = len(sales)
         if valid_sales == 0:
@@ -107,26 +107,26 @@ class my_dashboard(models.Model):
             ]
 
             #PIE
-            x = dist_name
-            data = pd.Series(x).reset_index(name='value').rename(columns={'index':'country'})
-            data['angle'] = data['value']/data['value'].sum() * 2*pi
-            data['color'] = Category20c[len(x)]
+            # x = dist_name
+            # data = pd.Series(x).reset_index(name='value').rename(columns={'index':'country'})
+            # data['angle'] = data['value']/data['value'].sum() * 2*pi
+            # data['color'] = Category20c[len(x)]
 
-            p3 = figure(plot_width=700, plot_height=450, title=title_graph, toolbar_location=None,
-                    tools="hover", tooltips="@country: @value", x_range=(-0.5, 1.0))
+            # p3 = figure(plot_width=800, plot_height=500, title=title_graph, toolbar_location=None,
+            #         tools="hover", tooltips="@country: @value", x_range=(-0.5, 1.0))
 
-            p3.wedge(x=0, y=1, radius=0.4,
-                    start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
-                    line_color="white", fill_color='color', legend='country', source=data)
+            # p3.wedge(x=0, y=1, radius=0.4,
+            #         start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
+            #         line_color="white", fill_color='color', legend='country', source=data)
 
-            p3.axis.axis_label=None
-            p3.axis.visible=False
-            p3.grid.grid_line_color = None
-            p3.xaxis.major_label_orientation = 1.2
-            tab3 = Panel(child=p3, title="Pie")
+            # p3.axis.axis_label=None
+            # p3.axis.visible=False
+            # p3.grid.grid_line_color = None
+            # p3.xaxis.major_label_orientation = 1.2
+            # tab3 = Panel(child=p3, title="Pie")
 
             #BAR
-            p = figure(x_range=names, plot_width=700, plot_height=450, title=title_graph, tooltips=TOOLTIPS)
+            p = figure(x_range=names, plot_width=800, plot_height=500, title=title_graph, tooltips=TOOLTIPS)
             p.vbar(x=names, width=0.5, bottom=0,top=total_amount, color="firebrick")
             p.xgrid.grid_line_color = None
             p.y_range.start = 0
@@ -134,7 +134,7 @@ class my_dashboard(models.Model):
             tab0 = Panel(child=p, title="bar")
 
             #CICLE
-            p1 = figure(x_range=names, plot_width=700, plot_height=450, title=title_graph,
+            p1 = figure(x_range=names, plot_width=800, plot_height=500, title=title_graph,
                     toolbar_location=None, tooltips=TOOLTIPS)
             p1.circle('x', 'y', size=20, color="navy", alpha=0.5, source=source)
             p1.xgrid.grid_line_color = None
@@ -143,7 +143,7 @@ class my_dashboard(models.Model):
             tab1 = Panel(child=p1, title="circle")
 
             #LINE
-            p2 = figure(x_range=names, plot_width=700, plot_height=450, title=title_graph,
+            p2 = figure(x_range=names, plot_width=800, plot_height=500, title=title_graph,
                     toolbar_location=None)
             p2.line(names, total_amount, line_width=3, color="navy", alpha=0.5)
             p2.xgrid.grid_line_color = None
@@ -152,14 +152,14 @@ class my_dashboard(models.Model):
             tab2 = Panel(child=p2, title="line")
 
             #BAR
-            p4 = figure(x_range=k, plot_width=700, plot_height=450, title=highest_title_graph)
+            p4 = figure(x_range=k, plot_width=800, plot_height=500, title=highest_title_graph)
             p4.vbar(x=k, width=0.5, top=v, color="firebrick")
             p4.xgrid.grid_line_color = None
             p4.y_range.start = 0
-            p2.xaxis.major_label_orientation = 1.2
+            p4.xaxis.major_label_orientation = 1.2
             tab4 = Panel(child=p4, title="bar")
 
-            tabs = Tabs(tabs=[ tab1, tab2, tab0, tab3, tab4 ])
+            tabs = Tabs(tabs=[ tab1, tab2, tab0, tab4 ])
 
             script, div = components(tabs)
             tes = '%s%s\n\n\n' % (div, script)
