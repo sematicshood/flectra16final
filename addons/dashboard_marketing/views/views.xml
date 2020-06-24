@@ -1,60 +1,67 @@
 <flectra>
   <data>
-    <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="dashboard_marketing.list">
-      <field name="name">dashboard_marketing list</field>
-      <field name="model">dashboard_marketing.dashboard_marketing</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
-    -->
 
-    <!-- actions opening views on models -->
-    <!--
     <record model="ir.actions.act_window" id="dashboard_marketing.action_window">
-      <field name="name">dashboard_marketing window</field>
-      <field name="res_model">dashboard_marketing.dashboard_marketing</field>
-      <field name="view_mode">tree,form</field>
+      <field name="name">My Dashboard</field>
+      <field name="res_model">dashboard_marketing.my_dashboard</field>
+      <field name="view_mode">form,kanban</field>
     </record>
-    -->
 
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="dashboard_marketing.action_server">
-      <field name="name">dashboard_marketing server</field>
-      <field name="model_id" ref="model_dashboard_marketing_dashboard_marketing"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
+    <record id="wa_automation.my_dashboard_view_list_1" model="ir.ui.view" >
+      <field name="name">My Dashboard</field>
+      <field name="model">dashboard_marketing.my_dashboard</field>
+      <field name="arch" type="xml">
+        <form>
+                <kanban>
+                    <div><p>Start Date</p><field name="filter_date"/><p>End Date</p><field name="filter_date_end"/></div>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div>
+                                    <field name="bokeh_chart" widget="bokeh_chart" nolabel="1"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+                <hr></hr>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+            <div class="oe_chatter">
+            
+            </div>
+        </form>
       </field>
     </record>
-    -->
 
     <!-- Top menu item -->
-    <!--
+    
     <menuitem name="dashboard_marketing" id="dashboard_marketing.menu_root"/>
-    -->
+   
     <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="dashboard_marketing.menu_1" parent="dashboard_marketing.menu_root"/>
-    <menuitem name="Menu 2" id="dashboard_marketing.menu_2" parent="dashboard_marketing.menu_root"/>
+    
+    <menuitem name="Dashboard Utama" id="dashboard_marketing.menu_1" parent="dashboard_marketing.menu_root"/>
+    <!-- <menuitem name="Menu 2" id="dashboard_marketing.menu_2" parent="dashboard_marketing.menu_root"/>
     -->
     <!-- actions -->
-    <!--
-    <menuitem name="List" id="dashboard_marketing.menu_1_list" parent="dashboard_marketing.menu_1"
+    <menuitem name="Dashboard Chart" id="dashboard_marketing.menu_1_list" parent="dashboard_marketing.menu_1"
               action="dashboard_marketing.action_window"/>
-    <menuitem name="Server to list" id="dashboard_marketing" parent="dashboard_marketing.menu_2"
-              action="dashboard_marketing.action_server"/>
-    -->
+    <!-- <menuitem name="Server to list" id="dashboard_marketing" parent="dashboard_marketing.menu_2"
+              action="dashboard_marketing.action_server"/> -->
+   
   </data>
 </flectra>
