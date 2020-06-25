@@ -1,7 +1,7 @@
 <flectra>
     <data>
 
-        <record id="wa_automation_send_wa_automation_action_window" model="ir.actions.act_window">
+        <record id="wa_automation.send_wa_automation_action_window" model="ir.actions.act_window">
             <field name="name">Send Whatsapp</field>
             <field name="res_model">wa_automation.wizards.sendwa</field>
             <field name="view_type">form</field>

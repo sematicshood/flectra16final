@@ -1,0 +1,36 @@
+<flectra>
+    <data>
+        <record id="wa_automation.wa_terjadwal_action_window" model="ir.actions.act_window">
+            <field name="name">Send Whatsapp Terjadwal</field>
+            <field name="res_model">wa_automation.wizards.sendwaschaduled</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="view_wa_automation_send_wa_automation_scheduled_action_window_form" model="ir.ui.view">
+            <field name="name">wa_automation.wizards.sendwa.form</field>
+            <field name="model">wa_automation.wizards.sendwaschaduled</field>
+            <field name="type">form</field>
+            <field name="priority" eval="10"/>
+            <field name="arch" type="xml">
+                <form string="Send WA Terjadwal">
+                    <group colspan="2">
+                        <field name="interval" style="width:200px;"/>
+                    </group>
+                    <group colspan="7">
+                        <field name="message_scheduled" placeholder="text.." style="width:400px;"/>
+                    </group>
+
+                    <footer>
+                        <button string="Kirim" name="confirm_button" type="object" class="btn-primary"/>
+                        <button string="Batal" class="btn-default" special="cancel" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</flectra>

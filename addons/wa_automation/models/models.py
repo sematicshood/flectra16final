@@ -3,10 +3,12 @@
 from flectra import models, fields, api, _
 from flectra.exceptions import UserError
 from addons.wa_automation.models.sender import Send_Whatsapp
+from addons.wa_automation.models.worker import sender_task
 
 
 class wa_automation(models.Model):
     _name = 'wa_automation.wa_automation'
+    _description = 'Database for wa automation'
 
     # code_order = fields.Char(string='Order Reference', required=True, copy=False, readonly=True, states={'draft': [('readonly', False)]}, index=True, default=lambda self: _('New'))
     nama_konsumen = fields.Char('Nama Konsumen', required=True)
@@ -18,17 +20,17 @@ class wa_automation(models.Model):
     fu_3 = fields.Boolean('Follow Up 3', default=False)
     promo = fields.Boolean('Promo', default=False)
     order_detail = fields.Char('Keterangan Order')
+    schedule = fields.Date('Jadwal WhatsApp', default='')
+    bokeh_chart = fields.Text(string='Bokeh Chart',compute='_compute_bokeh_chart',)
+    
 
 
-    # name = fields.Char()
-    # value = fields.Integer()
-    # value2 = fields.Float(compute="_value_pc", store=True)
-    # description = fields.Text()
+class My_Dashboard(models.Model):
+    _name = 'wa_automation.my_dashboard'
+    _description = 'Dashboard for wa automation'
 
-    # @api.depends('value')
-    # def _value_pc(self):
-    #     self.value2 = float(self.value) / 100
-
+    filter_date_end = fields.Date('Start Date', default='')
+    filter_date = fields.Date('End Date', default='')
 
 
 class Sendwa(models.TransientModel):
@@ -81,22 +83,39 @@ class Sendwa(models.TransientModel):
 
         accounts_sended = self.env['wa_automation.wa_automation'].search(
                         [(flag_type,'=', False)])
-        print("CEK", accounts_sended)
+
         for account in accounts_sended:
             phone = account.no_wa
             if phone:
                 if flag_type == 'fu_1':
-                    print("1")
                     account.fu_1 = True
                 elif flag_type == 'fu_2':
-                    print("2")
                     account.fu_2 = True
                 elif flag_type == 'fu_3':
-                    print("3")
                     account.fu_3 = True
                 elif flag_type == 'welcome':
-                    print("4")
                     account.welcome = True
                 elif flag_type == 'promo':
-                    print("5")
                     account.promo = True
+
+                sender = Send_Whatsapp(phone, message)
+                status = sender.send_post('chat', 'text')
+
+class SendwaScheduled(models.TransientModel):
+
+    _name = 'wa_automation.wizards.sendwaschaduled'
+
+    message_scheduled = fields.Text('WhatsApp Terjadwal')
+    no_wa = fields.Char('Nomor Whatsapp', default='')
+    interval = fields.Selection([('6', '6 jam'), ('12', '12 jam'), ('24', '24 jam')], default='', string="Set Interval Waktu")
+
+    @api.multi
+    def confirm_button(self):
+        message_scheduled = self.message_scheduled
+        no_wa = self.no_wa
+        interval = self.interval
+
+        if not message_scheduled or not interval or not no_wa:
+            raise UserError('Form belum lengkap!')
+
+        sender_task(message_scheduled, interval, no_wa)

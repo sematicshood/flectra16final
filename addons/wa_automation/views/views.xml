@@ -17,17 +17,16 @@
           <field name="fu_2"/>
           <field name="fu_3"/>
           <field name="promo"/>
+          <field name="schedule"/>
         </tree>
       </field>
     </record>
-   
 
-    <!-- actions opening views on models -->
-    
-    <record model="ir.actions.act_window" id="wa_automation.wa_automation_action_window">
-      <field name="name">wa_automation window</field>
-      <field name="res_model">wa_automation.wa_automation</field>
-      <field name="view_mode">tree,form</field>
+    <!-- actions opening views on models  Follow Up-->
+    <record model="ir.actions.act_window" id="wa_automation.follow_up_action_window">
+      <field name="name">Follow Up Window</field>
+      <field name="model">wa_automation.wa_automation</field>
+      <field name="view_mode">tree,form,graph,pivot,kanban</field>
         	<field name="arch" type="xml">
 				    <xpath expr="//field[@name='fu_3']" position="after">
 					    <field name="welcome" string="Selamat datang"/>
@@ -39,40 +38,22 @@
     </record>
    
 
-    <!-- server action to the one above -->
-    
-    <record model="ir.actions.server" id="wa_automation.funnel_follow_up_action_window">
-      <field name="name">wa_automation server</field>
-      <field name="res_model">wa_automation.wa_automation</field>
-      <field name="model_id" ref="model_wa_automation_wa_automation"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
-      </field>
-    </record>
-   
-
-    <!-- Top menu item -->
-    
-    <menuitem name="wa_automation" id="wa_automation.menu_root"/>
+    <!-- Top menu item -->  
+    <menuitem name="wa automation" id="wa_automation.menu_root"/>
    
     <!-- menu categories -->
-    
-    <menuitem name="WA_AUTOMATION" id="wa_automation.menu_1" parent="wa_automation.menu_root"/>
-    <menuitem name="FUNNEL_FOLLOW_UP" id="wa_automation.menu_2" parent="wa_automation.menu_root"/>
+    <menuitem name="FUNNEL FOLLOW UP" id="wa_automation.menu_1" parent="wa_automation.menu_root"/>
+    <menuitem name="WA TERJADWAL" id="wa_automation.menu_2" parent="wa_automation.menu_root"/>
     <menuitem name="WA_TRANSACTION" id="wa_automation.menu_3" parent="wa_automation.menu_root"/>   
     
     <!-- actions -->
-    <menuitem name="wa_automation" id="wa_automation.menu_1_list" parent="wa_automation.menu_1"
-              action="wa_automation.wa_automation_action_window"/>
+    <menuitem name="Funnel Follow Up" id="wa_automation.menu_1_list" parent="wa_automation.menu_1"
+              action="wa_automation.follow_up_action_window"/>
     <menuitem name="Kirim Whatsapp" id="wa_automation.menu_2_list" parent="wa_automation.menu_1"
-              action="wa_automation_send_wa_automation_action_window"/>
-    <menuitem name="funnel_follow_up" id="wa_automation.menu_3_list" parent="wa_automation.menu_2"
-              action="wa_automation.funnel_follow_up_action_window"/>
-   
+              action="wa_automation.send_wa_automation_action_window"/>
+    <menuitem name="WhatsApp Terjadwal" id="wa_automation.menu_3_list" parent="wa_automation.menu_1"
+              action="wa_automation.wa_terjadwal_action_window"/>
+
   </data>
 </flectra>
+

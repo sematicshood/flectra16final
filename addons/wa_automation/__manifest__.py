@@ -20,12 +20,12 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
-
+    'depends': ['base','sale'],
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'wizards/send_wa.xml',
+        'wizards/scheduled_wa.xml',
         'views/views.xml',
         'views/templates.xml',
     ],
