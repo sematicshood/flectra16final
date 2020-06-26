@@ -1,0 +1,46 @@
+<flectra>
+  <data>
+		<record id="marketing_chart.action_window" model="ir.actions.act_window">
+			<field name="name">Daftar Penjualan</field>
+			<field name="res_model">marketing_chart.marketing_chart</field>
+			<field name="view_mode">tree,form,pivot,graph</field>
+			<field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add manual
+              </p>				
+				<p>klik tombol create untuk membuat data baru manual</p>
+			</field>
+		</record>
+
+    <record id="marketing_chart.action_window_tree" model="ir.ui.view">
+        <field name="name">Daftar Penjualan</field>
+        <field name="model">marketing_chart.marketing_chart</field>
+        <field name="arch" type="xml">
+            <tree string="Accounts">
+              <field name="types"/>
+              <field name="penjualan"/>
+              <field name="totalnya"/>
+              <!-- <field name="salesman"/>
+              <field name="source"/>
+              <field name="konsumen"/>
+              <field name="tanggal_order"/>
+              <field name="total"/> -->
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Top menu item -->    
+    <menuitem name="marketing_chart" id="marketing_chart.menu_root"/>
+   
+    <!-- menu categories -->
+    <menuitem name="Data Penjualan" id="marketing_chart.menu_1" parent="marketing_chart.menu_root"/>
+
+    <!-- actions -->
+    <menuitem name="Penjualan" id="marketing_chart.menu_1_list" parent="marketing_chart.menu_1"
+              action="marketing_chart.action_window"/>
+    <menuitem name="Ambil Data Konsumen" id="marketing_chart.menu_2_list" parent="marketing_chart.menu_1"
+              action="marketing_chart.get_data_konsumen"/>
+   
+  </data>
+</flectra>

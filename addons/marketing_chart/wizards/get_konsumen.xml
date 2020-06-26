@@ -1,0 +1,41 @@
+<flectra>
+    <data>
+        <record id="marketing_chart.get_data_konsumen" model="ir.actions.act_window">
+            <field name="name">Get Data Konsumen</field>
+            <field name="res_model">marketing_chart.wizards.getkonsumen</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="view_vit_generate_efaktur_form2" model="ir.ui.view">
+            <field name="name">Get Data Konsumen</field>
+            <field name="model">marketing_chart.wizards.getkonsumen</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Ambil Data">
+                    <group colspan="4">
+                        <field name="get_type" style="width:400px;"/>
+                    </group>
+
+                    <group colspan="4">
+                        <field name="rangenya" style="width:400px;"/>
+                    </group>
+
+                    <group colspan="4">
+                        <field name="indikator" style="width:400px;"/>
+                    </group>
+
+                    <footer>
+                        <button string="Ambil" name="confirm_button2" type="object" class="btn-primary"/>
+                        <button string="Batal" class="btn-default" special="cancel" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+    </data>
+</flectra>
+
