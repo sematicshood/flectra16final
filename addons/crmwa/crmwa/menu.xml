@@ -3,7 +3,7 @@
 		<record id="action_course_list1" model="ir.actions.act_window">
 			<field name="name">Daftar Konsumen</field>
 			<field name="res_model">cmrwa.accounts</field>
-			<field name="view_mode">tree,form</field>
+			<field name="view_mode">tree,form,pivot,graph</field>
 			<field name="help" type="html">
               <p class="oe_view_nocontent_create">
                 Click to add manual
@@ -40,7 +40,7 @@
 		<menuitem id="crmwa_1" name="Crmwa" sequence="10" parent="crmwa_0"/>
 		<menuitem id="crmwa_1_1"
 		 action="action_course_list1"
-		 name="Crmwa"
+		 name="Daftar Konsumen"
 		 sequence="10"
 		 parent="crmwa_1"/>
 

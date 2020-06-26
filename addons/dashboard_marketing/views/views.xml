@@ -13,7 +13,7 @@
       <field name="arch" type="xml">
         <form>
                 <kanban>
-                    <div><p>Start Date</p><field name="filter_date"/><p>End Date</p><field name="filter_date_end"/></div>
+                    <div><p>Start Date</p><field name="filter_date_end"/><p>End Date</p><field name="filter_date"/></div>
                     <templates>
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_global_click">

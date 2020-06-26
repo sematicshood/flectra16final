@@ -24,6 +24,7 @@ class Accounts(models.Model):
     ket = fields.Char('Alasan')
     status_call = fields.Boolean('Status Telpon', default=False)
     terkirim = fields.Boolean('Terkirim', default=False)
+    sendimage = fields.Boolean(default=False)
 
 
 class Sendwa(models.TransientModel):
@@ -33,7 +34,7 @@ class Sendwa(models.TransientModel):
 
     message_h7 = fields.Text('Message H7')
     message_h3 = fields.Text('Message H3')
-    url_image = fields.Html("Url Image")
+    url_image = fields.Text("Url Image")
     # new_image = fields.Binary("Image", attachment=True,
     #     help="This field holds the image used as crmwa image, limited to 1024x1024px",)
 
@@ -60,10 +61,9 @@ class Sendwa(models.TransientModel):
         message_h7 = self.message_h7
         message_h3 = self.message_h3
         url_image = self.url_image
-        # image =  self.new_image
         message = ""
 
-        if not message_h7 and not message_h3 and len(url_image) < 13:
+        if not message_h7 and not message_h3 and not url_image:
             raise UserError('Message atau image tidak boleh kosong!')
         
         if message_h7:
@@ -91,11 +91,15 @@ class Sendwa(models.TransientModel):
             status_kedatangan = account.status_kedatangan
             status_follow_up = account.status_follow_up
             terkirim = account.terkirim
+            sendimage = account.sendimage
 
             if phone:
-                if is_image:
-                    sender = Send_Whatsapp(phone, message)
+                if is_image and not sendimage:
+                    sender = Send_Whatsapp(phone, url_image)
                     status = sender.send_image('media', 'url')
+                    if status == 200:
+                        account.sendimage = True
+                        
                 else: 
                     if (current_date == tanggal_h7) and not status_kedatangan and (status_follow_up != 'H-7' or (status_follow_up == 'H-7' and not terkirim)) and message_h7:
                         account.status_whatsapp = True
@@ -151,7 +155,6 @@ class Getkonsumen(models.TransientModel):
                     check.status_kedatangan = False
                     check.status_follow_up = ""                    
          
-            
             if not check.id:
                 cr_date = datetime.strptime(sale.date_order, '%Y-%m-%d %H:%M:%S')
                 tanggal_h7 = cr_date + timedelta(days=53)

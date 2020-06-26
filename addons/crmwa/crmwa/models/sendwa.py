@@ -24,7 +24,6 @@ class Send_Whatsapp:
         phone =  self.receiver
         phone = self.check_number(phone)
         client_uuid = uuid.uuid1()
-        print("message ", self.message)
         sendwa = CLIENT.format(type_message, TOKEN, SENDER, phone,
                                     client_uuid, type_post, self.message)
         status = requests.post(sendwa)
@@ -35,7 +34,6 @@ class Send_Whatsapp:
         phone =  self.receiver
         phone = self.check_number(phone)
         client_uuid = uuid.uuid1()
-        print("message ", self.message)
         sendwa = CLIENT.format(type_message, TOKEN, SENDER, phone,
                                     client_uuid, type_post, self.message)
         status = requests.post(sendwa)
